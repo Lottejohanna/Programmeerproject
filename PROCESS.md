@@ -20,4 +20,21 @@ Could not determine the specific wealth indicators so started to look again for 
 
 Wed January 11
 
-Write a new readme and draw new concept. 
+Written a new readme and concept before the first morning meeting. My feedback at the first morning meeting was that my story-telling aspect should be more clear. 
+
+So decided to examine the relationship between BMI, GDP and happiness. I will try to find a trend in find a level of GDP which provides for optimal happiness and healthy level of BMI. 
+
+Other possible variables are level of education, female/male difference and life expectancy. 
+
+I acquired the data from the different databanks. 
+* Worldbank - Population and GDP per capita
+* World Health Organization - BMI, overweight and obesity
+* Wikipedia - Happiness rate
+
+New sketch of my concept. Difficult to determine in advance how all the visualizations will be linked. 
+
+Consulted other students about proper JSON format.
+
+In the design document I formulated how all the different visualizations interact, the datasets, my JSON format, the sketch and the libraries I'm planning to use.
+
+Slowly I'm getting a better idea of what needs to be done. Tomorrow I will try to make the data ready to use in a javascript file. So first I need to convert my 6 CSV files to 1 JSON file in the morning. Then, in the afternoon I can create my javascript, css and html files and prepare for the friday presentation.

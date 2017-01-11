@@ -1,8 +1,4 @@
-# Project proposal
-
-## Concept
-
-The prosperity of a country, commonly measured in terms of its annual per capita Gross Domestic Product (GDP), might have different relationships with population levels of body weight and happiness. In this visualization I want to show if there are any trends detectable using these variables. I want to examine if there is a level of GDP which provides for optimal happiness and a healthy level of BMI. 
+# Design Document
 
 ## Visualizations
 
@@ -18,12 +14,39 @@ A bar chart displaying the happiness of a country. The x-axis will display the c
 ### Visualization 4 (MVP)
 A table displaying the country name, BMI/overweight/obesity country ranking, GDP, happiness rate and the BMI/overweight/obesity. It will be possible to look for a specific country using a look up function and to sort the list by all these different variables. This table will also be linked to the worldmap and the barcharts. By default this will display the top 5 countries.
 
-![](doc/proposal2.png)
+## Sketch
+
+![](doc/design.png)
 
 ## Data
+* GDP and Population - Worldbank
+* BMI, overweight and obesity - World Health Organization
+* Happiness rate - Wikipedia
 
-As datasets I will use data from the worldbank for the GDP. I will use obesity data from the World Health Orginization. The happiness is available at Wikipedia. 
+The missing GDP numbers are complemented by numbers from other datasets:
+* American Samoa - bea
 
-## APIs and technical problems
+I will try to load all the 6 different csv files in one JSON file with the following structure:
 
-I will use the worldmap from datamaps.github.com. I will probably encounter a lot of technical problems. We have never tried to implement so many different visualizations on one page. They all have to be linked and updated once a user changes something.  
+{"2010": {"DZA": {"country": "Algeria",
+					"population": ...,
+					"weight": [{"category": "BMI", "fillkey": "A"},
+								{"category": "overweight", "fillkey": "B"},
+								{"category":, "obesity", "fillkey": "B"}],
+					"GDP": "1000",
+					"happiness": "6,7"},
+		"EGY": {...}},
+
+"2014": {"DZA": ...}}
+
+The BMI/overweight/obesity data and the happiness rate data first needs to be connected with the countrycodes from a separate countrycode python file.
+
+## Libraries
+
+I will use the following libraries:
+* D3 - //cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js
+* Topojson - //cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js
+* jQuery - http://code.jquery.com/jquery-latest.min.js
+* Bootstrap javascript - //netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js
+* Bootstrap stylesheet - //netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css
+* Datamaps javascript - /datamaps.world.min.js
