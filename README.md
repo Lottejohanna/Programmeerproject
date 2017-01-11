@@ -21,7 +21,7 @@ A table displaying the country, obesity ranking, obese percentage, bmi and gdp. 
 ### Visualization 4
 A bar chart displaying the happiness of a country. Also linked to all other visualizations. 
 
-![](doc/proposal.png)
+![](doc/proposal2.png)
 
 ## Data
 
