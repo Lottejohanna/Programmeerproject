@@ -5,27 +5,27 @@ Final project - D3 Visualization
 
 ## Concept
 
-Often GDP is used as a indicator of a country's economic performance. However, this only measures income, not wealth or how wealth is changing. GDP tells nothing about the long term sustainability of a country. Specific wealth indicators do account for this. 
+The prosperity of a country, commonly measured in terms of its annual per capita Gross Domestic Product (GDP), might have different relationships with population levels of body weight and happiness. In this visualization I want to show if there are any trends detectable using these variables.  
 
-I would like to visualize the Wealth Indicators vs. the GDP per country in a world map. I would like to compare if the countries with the highest GDP also the countries with the highest wealth indicators are. 
+## Visualizations
 
-## Visualisations
+### Visualizations 1 (MVP)
+A world map where the obesity rate of countries is shown. If you hover over a specific country the information will be displayed in a pop-up. For this map there is a drowdown menu where you can choose between both sexes/male/female and there will be two checkboxes where you can choose between 2010 and 2014. 
 
-On the left top side of the page I am planning to show a worldmap displaying the GDP/wealth indicators in category groups (different colors), where you can toggle between GDP and wealth indicators (Interactive component 1). (Visual component 1) As you hover over the country a pop-up will show more information.
+### Visualization 2 (MVP)
+A bar chart will display the GDP ranking of that country as a percentage of the total GDP per capita. This barchart will be linked with the worldmap. 
 
-Under the worldmap there is a slider displayed where you can choose a year. (Interactive component 2)
+### Visualization 3 (MVP)
+A table displaying the country, obesity ranking, obese percentage, bmi and gdp. It will be possible to look for a specific country and to sort the list by all these different variables. This table will also be linked with the worldmap
 
-On the right side of the world map there is a list of the top and worst 5 countries by the GDP or Wealth indicators (depending on users choice)
-
-Left under the world map I want a bar/line chart displaying the GDP/Wealth growth over 10 years (Visual component 2).
-
-Finally on the right side I want to display a specifications of the wealth indicators. It's not totally clear yet how I want to display these. (Visual component 3)
+### Visualization 4
+A bar chart displaying the happiness of a country. Also linked to all other visualizations. 
 
 ![](doc/proposal.png)
 
 ## Data
 
-As datasets I will use data from the worldbank. They have a seperate set named 'Wealth Accounting' which I can use for my wealth indicators. 
+As datasets I will use data from the worldbank for the GDP. I will use obesity data from the World Health Orginization. The happiness is available at Wikipedia. 
 
 ## APIs and technical problems
 
