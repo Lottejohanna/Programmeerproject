@@ -16,7 +16,7 @@ A table displaying the country name, BMI/overweight/obesity country ranking, GDP
 
 ## Sketch
 
-![](doc/design.png)
+![](doc/design.pdf)
 
 ## Data
 * GDP and Population - Worldbank
