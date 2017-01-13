@@ -53,3 +53,24 @@ Daily standup meeting - Exchanged some technical details, e.g. CSS, bootstrap, t
 ### Difficulties
 * Proper JSON format - fillKeys are 1 layer deeper than datamaps javascript file is used to
 
+# day 5
+
+Fri January 13
+
+* GDP and population in JSON format
+* Happiness in JSON format. First had to connect countries to countrycodes
+* Presentation: not enough time so no real feedback
+* All data put in JSON
+* Worked on prototype
+* Looping through keys in json to transform strings to floats for barcharts
+
+* wanted to implement all elements in prototype, but didn't have time enought to implement the table
+* still some trouble with my JSON format, hopefully monday there will be some help
+
+### Difficulties / questions for monday
+* Fillkeys for the worldmap
+* keys as x axis, values as y axis or looping through countrycodes by barchart
+* Barcharts appear in footer
+* Width of the page
+
+

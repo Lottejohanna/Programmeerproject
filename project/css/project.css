@@ -5,3 +5,88 @@ project.css
 Name: Lotte Slim
 Number: 10654976
 */
+
+/*HEADER*/
+/* Remove the jumbotron's default bottom margin */ 
+.jumbotron {
+  	margin-bottom: 0;
+  	max-height: 150px;
+  	margin: 0 auto;
+  	width: 100%;
+}
+
+.jumbotron h1 {
+	font-size: 40px;
+	margin-top: 0px;
+}
+
+/*FOOTER*/
+/* Add a gray background color and some padding to the footer */
+footer {
+  	background-color: #f2f2f2;
+  	padding: 25px;
+}
+
+/*WORLDMAP*/
+
+#container1 {
+	position: relative;
+	width: 60%;
+	height: 680px;
+}
+
+/*BARCHART*/
+
+.barcharts {
+	position: relative;
+	width: inherit;
+	height: 400px;
+}
+
+#container2 {
+	width: 50%;
+	height: 400px;
+	float: left;
+}
+
+#container3 {
+	width: 50%;
+	height: 400px;
+	float: right;
+}
+
+body {
+  	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  	position: relative;
+  	width: 100%;
+}
+
+.axis text {
+  	font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  	fill: none;
+  	stroke: #000;
+  	shape-rendering: crispEdges;
+}
+
+.bar {
+  	fill: steelblue;
+  	fill-opacity: .9;
+}
+
+.bar:hover {
+	fill: grey;
+}
+
+.x.axis path {
+  	display: none;
+}
+
+label {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
