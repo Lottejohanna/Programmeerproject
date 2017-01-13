@@ -38,3 +38,18 @@ Consulted other students about proper JSON format.
 In the design document I formulated how all the different visualizations interact, the datasets, my JSON format, the sketch and the libraries I'm planning to use.
 
 Slowly I'm getting a better idea of what needs to be done. Tomorrow I will try to make the data ready to use in a javascript file. So first I need to convert my 6 CSV files to 1 JSON file in the morning. Then, in the afternoon I can create my javascript, css and html files and prepare for the friday presentation.
+
+# day 4
+
+Thur January 12
+
+Daily standup meeting - Exchanged some technical details, e.g. CSS, bootstrap, table d3
+
+* Combined 3 csv files (obesity, overweight and BMI) into 1 csv file
+* Connected countries to countrycodes for csv file
+* Put overweight, obesity and BMI data in 1 dictionary
+* Created javascript, css and html files
+
+### Difficulties
+* Proper JSON format - fillKeys are 1 layer deeper than datamaps javascript file is used to
+
