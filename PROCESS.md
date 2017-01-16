@@ -73,4 +73,52 @@ Fri January 13
 * Barcharts appear in footer
 * Width of the page
 
+# day 6
+
+Mon January 16
+
+Tip from daily standup for json problem: create new dictionary in function in javascript to use for barchart.
+
+Change of plans for JSON, wanted most efficient JSON but thats very difficult for worldmap so change of plan for JSON
+
+"year": {"countrycode": {"country": .., "weight": [{"category": BMI, "fillKey": A}, 
+													{"category": Overweight, "fillKey": A}, 
+													{"category": Obesity, "fillKey": A}],
+						"GDP": ..,
+						"happiness": ..},
+		{"countrycode": ...}},
+"year": ... }}}
+
+TO
+
+"year": "BMI": 	{"countrycode": {"country": .., 
+						"fillKey": ..,
+						"GDP": ..,
+						"happiness": ..},
+				{"countrycode": ...}},
+		"Obesity": 	{"countrycode": {"country": .., 
+						"fillKey": ..,
+						"GDP": ..,
+						"happiness": ..},
+					{"countrycode": ...}},
+
+		"Overweight": 	{"countrycode": {"country": .., 
+						"fillKey": ..,
+						"GDP": ..,
+						"happiness": ..},
+					{"countrycode": ...}},
+
+* Created sorted barcharts
+* colored world map
+
+### Tomorrow
+* connect barchart and world map
+* add interactivity world map and barchart
+
+### Tips from daily stand up
+
+* w3 schools how to javascript filter table
+* bootstrap rows and colums, altijd 12 breed
+* verschillende files in html inladen
+
 
