@@ -53,6 +53,7 @@ with open('../data/weight.csv', 'rU') as infile:
                         # print data[years[i]][weight_categories[j]], i,j, "hoi" 
 
                         data[years[i]][weight_categories[j]].update({country[1]: { "country": country[2],
+                                                                            "countrycode": country[1],
                                                                             "fillKey": category[j],
                                                                             "number": numbers[j]}})
                             

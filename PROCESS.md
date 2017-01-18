@@ -121,4 +121,41 @@ TO
 * bootstrap rows and colums, altijd 12 breed
 * verschillende files in html inladen
 
+# day 7
+
+Tue January 17
+
+* difficulties connecting button and drowdown choices
+
+* student helped me: make global variable 'current_year' and 'current_category' and update these when clicked on button or dropdown
+
+* again adjusted json to ease interactivity later on (other student told me), added countrycode to deepest layer:
+
+{"year": {"BMI": 	{"countrycode": {"country": ..,
+								"countrycode": .., 
+								"fillKey": ..,
+								"GDP": ..,
+								"happiness": ..},
+				{"countrycode": ...}},
+		"Obesity": 	{"countrycode": {"country": ..,
+									"countrycode": .., 
+									"fillKey": ..,
+									"GDP": ..,
+									"happiness": ..},
+					{"countrycode": ...}},
+
+		"Overweight": 	{"countrycode": {"country": ..,
+										"countrycode": .., 
+										"fillKey": ..,
+										"GDP": ..,
+										"happiness": ..},
+					{"countrycode": ...}},
+
+
+
+updateChloreplet -> 
+
+if toggle
+update_map
+
 

@@ -27,13 +27,38 @@ footer {
   	padding: 25px;
 }
 
+/*DROPDOWN MENU*/
+
+/*.button.btn.btn-primary {
+	background-color: white;
+	color: black;
+}*/
+/*.dropdown-menu {
+    position: absolute;
+    left: 1000px;
+    top: 40px;
+}
+*/
 /*WORLDMAP*/
+.map.table {
+	position: relative;
+	width: inherit;
+	height: 780px;	
+}
 
 #container1 {
-	position: relative;
 	width: 60%;
-	height: 680px;
+	height: 780px;
+	float:left;
 }
+
+#container4 {
+	width: 30%;
+	height: 680px;
+	float: right;
+	overflow: scroll;
+}
+
 
 /*BARCHART*/
 
@@ -54,6 +79,7 @@ footer {
 	height: 400px;
 	float: right;
 }
+
 
 body {
   	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

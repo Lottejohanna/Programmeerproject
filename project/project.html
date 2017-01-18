@@ -39,19 +39,41 @@ Number: 10654976
           </div>
         </div>
 
-        <div id="container1"></div>
+        <!-- Buttons -->
+        <div class="btn-group">
+            <button type="button" value="2010" class="btn btn-default">2010</button>
+            <button type="button" value="2014" class="btn btn-default">2014</button>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                Category <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a class="m" value="Obesity" selected='True' href="#">Obesity</a></li>
+                <li><a class="m" value="Overweight" href="#">Overweight</a></li>
+                <li><a class="m" value="BMI" href="#">BMI</a></li>
+            </ul>
+        </div>
+
+        <div class="map table">
+            <div id="container1"></div>
+            <div id="container4">
+                <style type="text/css">
+                    body { font-family: 'Helvetica Neue', Helvetica; font-weight: 300; padding: 20px;}
+                    th { text-align: left; }
+                    th, td { padding: 0 1em 0.5ex 0;}
+                    th.center, td.center { text-align: center; }
+                    th.num, td.num { text-align: right; }
+                </style>
+            </div>
+        </div>
 
         <div class="barcharts">
           <div id="container2"></div>
           <div id="container3"></div>
         </div>
 
-        <!-- Buttons -->
-        <div class="btn=group">
-
-            <button type="button" class="btn btn-default">2014</button>
-        </div>
-        
 <!-- 
         <div id="container2"></div>
         <div id="container3"></div> -->
