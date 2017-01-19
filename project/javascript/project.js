@@ -22,13 +22,11 @@ var current_year = "2014";
 d3.json("data.json", function(error, data) {
   if (error) throw error;
 
-  // default worldmap and barcharts
-  draw_worldmap(data, '2014', 'Obesity');
-  draw_barchart(data, '#container2', '2014', 'GDP', "Obesity");
-  draw_barchart(data, '#container3', '2014', 'Happiness', "Obesity");
-
-  // render the table
-  tabulate(data, '2014', 'Obesity');
+  // default worldmap, barcharts and table
+  draw_worldmap(data, current_year, current_category);
+  draw_barchart(data, '#container2', current_year, 'GDP', current_category);
+  draw_barchart(data, '#container3', current_year, 'Happiness', current_category);
+  draw_table(data, '2014', 'Obesity');
 
   // draw graphs after chosen year
   d3.selectAll(".btn.btn-default")
@@ -37,34 +35,31 @@ d3.json("data.json", function(error, data) {
       d3.select(".datamap").remove()
       d3.selectAll(".rem").remove()
 
-      var current_year = this.getAttribute("value");
-      // var category = d3.selectAll(".m");
-      console.log("BUTTON");
-      console.log(current_year);
-      console.log(current_category);
+      current_year = this.getAttribute("value");
 
       draw_worldmap(data, current_year, current_category);
       draw_barchart(data, '#container2', current_year, 'GDP', current_category);
       draw_barchart(data, '#container3', current_year, 'Happiness', current_category);
+      draw_table(data, current_year, current_category);
     });
 
   d3.selectAll(".m")
     .on("click", function() {
-      d3.select('.datamap').remove();
+      d3.select('.datamap').remove()
+      d3.selectAll(".table.rem").remove();
 
       // var year = d3.selectAll(".btn.btn-default");
-      var current_category = this.getAttribute("value");
-      console.log("DROPDOWN");
-      console.log(current_year);
-      console.log(current_category);
+      current_category = this.getAttribute("value");
 
       draw_worldmap(data, current_year, current_category);
+      draw_table(data, current_year, current_category);
     });
 
   
 });
 
 function draw_worldmap(data, year, category){
+
 // select proper year and category
   data = data[year][category];
 
@@ -177,12 +172,14 @@ function draw_barchart(data, container, year, variable, category){
     // no data
     if ( (data[key][variable] == '..') || (data[key][variable] === undefined) ) {
       dict.push( {value: 0,
-                country: data[key].country} );
+                country: data[key].country,
+                countrycode: data[key].countrycode} );
     }
     // data
     else {
       dict.push( {value: +data[key][variable],
-                country: data[key].country} );
+                country: data[key].country,
+                countrycode: data[key].countrycode} );
     }
   }
 
@@ -237,6 +234,7 @@ function draw_barchart(data, container, year, variable, category){
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.value); })
       .attr("height", function(d) { return height - y(d.value); })
+      .attr("countrycode", function(d) {  return d.countrycode })
       // show tooltip when hover over bar
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide)
@@ -244,7 +242,7 @@ function draw_barchart(data, container, year, variable, category){
 };
 
 // The table generation function
-function tabulate(data, year, category) {
+function draw_table(data, year, category) {
 
   var data = data[year][category];
 
@@ -253,6 +251,7 @@ function tabulate(data, year, category) {
   for (var key in data) {
 
     dict.push( { country: data[key].country,
+                countrycode: data[key].countrycode,
                 number: +data[key].number,
                 GDP: +data[key].GDP,
                 Happiness: +data[key].Happiness });
@@ -271,29 +270,52 @@ function tabulate(data, year, category) {
   // }
 
   var columns = [
-    { head: 'Country', cl: 'country', html: function(d) { return d.country }},
-    { head: category, cl: 'category', html: function(d) {return d.number}},
-    { head: 'GDP', cl: 'GDP', html: function(d) { return d.GDP }},
-    { head: 'Happiness', cl: "happiness", html: function(d) { return d.Happiness }}
+    { head: 'Country', cl: 'country', html: function(d) { return d.country }, code: function(d) { return d.countrycode }},
+    { head: category, cl: 'number', html: function(d) {return d.number}, code: function(d) { return d.countrycode }},
+    { head: 'GDP', cl: 'GDP', html: function(d) { if (isNaN(d.GDP.toFixed(2))) {
+                                                    return '<i>Unknown</i>';
+                                                  } 
+                                                  return '\u0024' + d.GDP.toFixed(2) }, code: function(d) { return d.countrycode }},
+    { head: 'Happiness', cl: "Happiness", html: function(d) { if (isNaN(d.Happiness.toFixed(2))) {
+                                                                return '<i>Unknown</i>';
+                                                              } 
+                                                              return d.Happiness.toFixed(2) }, code: function(d) { return d.countrycode }}
   ];
 
   // create table
-  var table = d3.select("#container4").append("table");
+  var sortAscending = true;
+  var table = d3.select("#container4").append("table")
+
+  table.attr("id", "myTable")
+    .attr('class', 'table rem');
 
   // create table header
-  table.append('thead').append('tr')
-    .selectAll('th')
-    .data(columns).enter()
-    .append('th')
-    .attr('class', function(d) { return d.cl })
-    .text(function(d) {return d.head });
+  var headers = table.append('thead').append('tr')
+                        .selectAll('th')
+                        .data(columns).enter()
+                        .append('th')
+                        .attr('class', function(d) { return d.cl; })
+                        .text(function(d) {return d.head; })
+                        .on('click', function(d) {
+                          headers.attr('class', 'header');
+
+                          if (sortAscending) {
+                            rows.sort(function(a, b) {console.log('a'); console.log(a[d.cl]); return b[d.cl] - a[d.cl]; });
+                            sortAscending = false;
+                            this.className = 'aes';
+                          } else {
+                            rows.sort(function(a, b) { return a[d.cl] - b[d.cl]; });
+                            sortAscending = true;
+                            this.className = 'des';
+                          }
+                        });
 
   // create table body
-  table.append('tbody')
-    .selectAll('tr')
-    .data(dict).enter()
-    .append('tr')
-    .selectAll('td')
+  var rows = table.append('tbody')
+                .selectAll('tr')
+                .data(dict).enter()
+                .append('tr')
+  rows.selectAll('td')
     .data(function(row, i) {
         return columns.map(function(c) {
             // compute cell values for this specific row
@@ -306,33 +328,46 @@ function tabulate(data, year, category) {
     }).enter()
     .append('td')
     .html(function(d) {return d.html })
-    .attr('class', function(d) {return d.cl});
+    .attr('class', function(d) {return d.cl})
+    .on('mouseover', mouseOver)
+    .on('mouseout', mouseOut);
 
-  // // append the header row
-  // thead.append("tr")
-  //     .selectAll("th")
-  //     .data(columns)
-  //     .enter()
-  //     .append("th")
-  //         .text(function(column) { return column; });
+}
+function mouseOver(d) {
+  var current_code = d.code;
 
-  // // create a row for each object in the data
-  // var rows = tbody.selectAll("tr")
-  //     .data(data)
-  //     .enter()
-  //     .append("tr");
+  var value = d3.select('.bar').html( function(d) { return d.countrycode });
+  console.log(value[0]);
+  if (current_code == value) {
+    console.log(current_code);
+  }
+  // SELECTEREN OP VALUE EN VAN DIE DE STYLE VERANDEREN (GOOGLE)
+  // d3.selectAll(.bar).attr("style")
+}
 
-  // // create a cell in each row for each column
-  // var cells = rows.selectAll("td")
-  //     .data(function(row) {
-  //         return columns.map(function(column) {
-  //             return {column: column, value: row[column]};
-  //         });
-  //     })
-  //     .enter()
-  //     .append("td")
-  //     .attr("style", "font-family: Courier") // sets the font style
-  //         .html(function(d) { return d.value; });
+function mouseOut(d) {
+
+}
+
+function searchFunction() {
+  // Declare variables 
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
 }
 
 

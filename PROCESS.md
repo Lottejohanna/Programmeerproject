@@ -127,7 +127,7 @@ Tue January 17
 
 * difficulties connecting button and drowdown choices
 
-* student helped me: make global variable 'current_year' and 'current_category' and update these when clicked on button or dropdown
+* student helped me: make global variable 'current_year' and 'current_category' and update these when clicked on button or dropdown, still not working
 
 * again adjusted json to ease interactivity later on (other student told me), added countrycode to deepest layer:
 
@@ -149,8 +149,37 @@ Tue January 17
 										"fillKey": ..,
 										"GDP": ..,
 										"happiness": ..},
-					{"countrycode": ...}},
+					{"countrycode": ...}}},
+"year": ...}
 
+* added table, source: http://bl.ocks.org/gka/17ee676dc59aa752b4e6. Needed to add scrollbar to table, but no I want the headers to stay on the screen all the time, this still needs to be fixed.
+
+Wed January 18
+
+* connect button with dropwdown menu
+
+* added search bar to the table
+
+* sorting table is added, still buggy because if you sort on two different categories, the second the you have to click twice on the header to get the column properly sorted. Also, unknown is still randomly distributed over the column. Lastly, only the numerical values are properly sorted, the alphabetical still go wrong.
+
+* 
+
+
+To do's today
+* search bar table 
+* sort table on click, also append ranking
+
+
+Fri January 20
+
+Styleday to do's
+* Colors
+* Style table
+* Bar chart axes (tickFormat)
+* Sources and names
+* Title
+* Worldmap legend
+* seperate files
 
 
 updateChloreplet -> 

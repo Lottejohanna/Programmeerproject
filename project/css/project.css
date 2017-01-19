@@ -10,8 +10,8 @@ Number: 10654976
 /* Remove the jumbotron's default bottom margin */ 
 .jumbotron {
   	margin-bottom: 0;
-  	max-height: 150px;
   	margin: 0 auto;
+  	max-height: 150px;
   	width: 100%;
 }
 
@@ -21,7 +21,7 @@ Number: 10654976
 }
 
 /*FOOTER*/
-/* Add a gray background color and some padding to the footer */
+/* Add a grey background color and some padding to the footer */
 footer {
   	background-color: #f2f2f2;
   	padding: 25px;
@@ -52,11 +52,33 @@ footer {
 	float:left;
 }
 
+/*TABLE*/
+#myInput {
+    background-image: url('searchicon.png'); /* Add a search icon to input */
+    background-size: 5%;
+    background-position: 8px 10px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 80%; /* Full-width = 100% */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+
 #container4 {
 	width: 30%;
 	height: 680px;
 	float: right;
 	overflow: scroll;
+}
+
+/*Table sorting*/
+th.des:after {
+  	content: "\21E9";
+}
+
+th.aes:after {
+  	content: "\21E7";
 }
 
 
