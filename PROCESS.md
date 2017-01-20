@@ -183,8 +183,13 @@ To do's today
 * sort table on click, also append ranking
 * connect country to barchart
 
-
 Fri January 20
+
+* appended ranking to table. Only appended in the table, because there it's only relevant.
+
+* Still having problems with my colors and hovering. At the moment the color won't change back once you have hovered over it. Also my popup stays on the screen although my mouse is not on the map anymore. I have to check out the popupTemplate function in the datamaps. 
+
+* appended legend to worldmap. Problem how I am gonna display my legend, because for every category there are different groups. Problem for monday.
 
 Styleday to do's
 * Colors
@@ -194,12 +199,8 @@ Styleday to do's
 * Title
 * Worldmap legend
 * seperate files
+* add daily standups (report) to my github
 
 * Florinde: favicon ~ http://stackoverflow.com/questions/4888377/how-to-add-a-browser-tab-icon-favicon-for-a-website
-
-updateChloreplet -> 
-
-if toggle
-update_map
 
 

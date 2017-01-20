@@ -51,6 +51,30 @@ footer {
 	height: 780px;
 	float:left;
 }
+	
+/* legenda */
+
+.datamaps-legend {
+	text-align: center;
+	position: relative;
+  	top: 40px;
+  	left: 320px;
+  	bottom: 565px;
+  	width: 850px;
+}
+
+.datamaps-legend dl {
+	margin-left: 80px;
+}
+
+/*dropdown menu*/
+.btn.btn-primary.dropdown-toggle {
+	left: 800%;
+}
+
+.dropdown-menu {
+	left: 800%;
+}
 
 /*TABLE*/
 #myInput {

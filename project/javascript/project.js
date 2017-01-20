@@ -29,11 +29,15 @@ d3.json("data.json", function(error, data) {
   draw_barchart(data, '#container3', current_year, 'Happiness', current_category);
   draw_table(data, '2014', 'Obesity');
 
+  // add_rank_table(data, current_year, current_category);
+
+
   // draw graphs after chosen year
   d3.selectAll(".btn.btn-default")
     .on("click", function() {
       // d3.select(".datamaps-legend").remove()
       d3.select(".datamap").remove()
+      d3.select('.datamaps-legend').remove()
       d3.selectAll(".rem").remove()
 
       current_year = this.getAttribute("value");
@@ -47,6 +51,7 @@ d3.json("data.json", function(error, data) {
   d3.selectAll(".m")
     .on("click", function() {
       d3.select('.datamap').remove()
+      d3.select('.datamaps-legend').remove()
       d3.selectAll(".table.rem").remove();
 
       // var year = d3.selectAll(".btn.btn-default");
@@ -77,8 +82,14 @@ function draw_worldmap(data, year, category){
 
       // content pop-up on hovering
       popupTemplate: function(geo, data) {
-        if (data) {
-          current_code = geo.id;
+        current_code = geo.id;
+        // if (prevFill) {
+        //   d3.select(selectorCountry).style("fill", prevFill);
+        // }
+        // selectorCountry = '.datamaps-subunit.' + current_code;
+        // prevFill = d3.selectAll(selectorCountry).style("fill")
+        // d3.selectAll(selectorCountry).style("fill", "000000")
+        if (data) {   
           d3.selectAll('#' + current_code).style('fill', 'yellow');
           if (data.number == "..") {
             return ['<div class="hoverinfo">',
@@ -133,8 +144,32 @@ function draw_worldmap(data, year, category){
     data: data    
   });
 
-  console.log(map);
+  // legend of the world map
+  map.legend({
+    legendTitle: 'Percentage Obesity in the World',
+    defaultFillName: 'No Data',
+    labels: {
+      A: '0-20',
+      B: '20-40', 
+      C: '40-60',
+      D: '60-80',
+      E: '80-100'
+    }
 
+  });
+
+}
+
+d3.select('#container1').on('mouseout', function(d) {
+  // if (d3.event.target.tagName == "circle"){
+  //   console.log(d3.select(d3.event.target).data()[0],"out")
+  console.log(d);
+  d3.selectAll('#' + current_code).style('fill', 'steelblue');
+});
+
+
+function test(d) {
+  console.log('joe');
 }
 
 function draw_barchart(data, container, year, variable, category){
@@ -289,7 +324,17 @@ function draw_table(data, year, category) {
     // }
   // }
 
+  // sort dictionary from biggest to lowest value of category
+  var top = dict.sort(function(a, b) { return a.number < b.number ? 1 : -1; })
+                .slice(0, dict.length);
+
+  // append ranking number to dictionary
+  for (i = 0; i < dict.length; i++) { 
+    dict[i].ranking = i + 1;
+  }
+
   var columns = [
+    { head: '#', cl: 'ranking', html: function(d) { return d.ranking }, code: function(d) {return d.countrycode }},
     { head: 'Country', cl: 'country', html: function(d) { return d.country }, code: function(d) { return d.countrycode }},
     { head: category, cl: 'number', html: function(d) {return d.number}, code: function(d) { return d.countrycode }},
     { head: 'GDP', cl: 'GDP', html: function(d) { if (isNaN(d.GDP.toFixed(2))) {
@@ -320,7 +365,7 @@ function draw_table(data, year, category) {
                           headers.attr('class', 'header');
 
                           if (sortAscending) {
-                            rows.sort(function(a, b) {console.log('a'); console.log(a[d.cl]); return b[d.cl] - a[d.cl]; });
+                            rows.sort(function(a, b) { return b[d.cl] - a[d.cl]; });
                             sortAscending = false;
                             this.className = 'aes';
                           } else {
@@ -385,8 +430,6 @@ function searchFunction() {
     } 
   }
 }
-
-
 
 function updateData() {}
 
