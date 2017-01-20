@@ -160,14 +160,28 @@ Wed January 18
 
 * added search bar to the table
 
-* sorting table is added, still buggy because if you sort on two different categories, the second the you have to click twice on the header to get the column properly sorted. Also, unknown is still randomly distributed over the column. Lastly, only the numerical values are properly sorted, the alphabetical still go wrong.
+* sorting table is added, still buggy because if you sort on two different categories, the second time you want to sort a different column you have to click twice on the header to get the column properly sorted. Also, unknown is still randomly distributed over the column. Lastly, only the numerical values are properly sorted, the alphabetical still go wrong.
 
-* 
+* To connect the countrycodes when hovered over a row in the table to the barchart i had to change the dictionary created in the function for the drawing the barcharts. 
+
+* Idea from Tim, add specific value to bars in barchart. Connect these bars with the rows in the table. I will try this tomorrow.
+
+Thu January 19
+
+* Connected rows from table with bars in barchart. Adding a value didn't work, so I added the countrycode as the specific id per bar. On mouseover I selected this specific bar and changed te color. On mouseout I changed the color back to the original color.
+
+* 11-12h Dentist appointment
+
+*  Problems connecting all the elements. If I connect the countries in the map to the bars in the barchart, my pop for the worldmap disapears. Very strange. Have to change popupTemplate function in datamaps, instead of writing own function for on mouseover/mouseout, because then the popupTemplate is overwritten and not displayed anymore. Tim helped me with this. (google: change on mouseout popupTemplate datamaps)
+
+* Source to rank countries in table on obesity/overweight/bmi ~ http://stackoverflow.com/questions/27479750/getting-top-10-values-in-a-json-file
+
+* 13-17h obligatory student assistent training
 
 
 To do's today
-* search bar table 
 * sort table on click, also append ranking
+* connect country to barchart
 
 
 Fri January 20
@@ -181,6 +195,7 @@ Styleday to do's
 * Worldmap legend
 * seperate files
 
+* Florinde: favicon ~ http://stackoverflow.com/questions/4888377/how-to-add-a-browser-tab-icon-favicon-for-a-website
 
 updateChloreplet -> 
 

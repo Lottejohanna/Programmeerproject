@@ -17,6 +17,7 @@ var margin = {top: 50, right: 30, bottom: 30, left: 40},
 
 var current_category = "Obesity";
 var current_year = "2014";
+var current_code;
 
 
 d3.json("data.json", function(error, data) {
@@ -77,6 +78,8 @@ function draw_worldmap(data, year, category){
       // content pop-up on hovering
       popupTemplate: function(geo, data) {
         if (data) {
+          current_code = geo.id;
+          d3.selectAll('#' + current_code).style('fill', 'yellow');
           if (data.number == "..") {
             return ['<div class="hoverinfo">',
                     '<strong>' + geo.properties.name + '</strong><br/>',
@@ -112,9 +115,26 @@ function draw_worldmap(data, year, category){
       defaultFill: '#bdbdbd' 
     },
 
+    // respond to choice of year by viewer
+    done: function(datamap) {
+      datamap.svg.selectAll('.datamaps-subunit')
+                    // .on('mouseover', function(geography) {
+                      
+                    //   d3.selectAll('.datamaps-subunit.' + current_code).style('opacity', '0.4').style('stroke', 'rgba(0,0,0,0.5)').style('stroke-width', '3');
+                    // })
+                    // .on('mouseout', function(geography) {
+                    //   current_code = geography.id;
+                    //   d3.selectAll('#' + current_code).style('fill', 'steelblue'); 
+                    //   d3.selectAll('.datamaps-subunit.' + current_code).style('opacity', '1').style('stroke', 'rgba(255,255,255,0.3)').style('stroke-width', '1'); 
+                    // });
+    },
+
     // data to display on worldmap
     data: data    
   });
+
+  console.log(map);
+
 }
 
 function draw_barchart(data, container, year, variable, category){
@@ -234,7 +254,7 @@ function draw_barchart(data, container, year, variable, category){
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.value); })
       .attr("height", function(d) { return height - y(d.value); })
-      .attr("countrycode", function(d) {  return d.countrycode })
+      .attr("id", function(d) {  return d.countrycode })
       // show tooltip when hover over bar
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide)
@@ -287,7 +307,7 @@ function draw_table(data, year, category) {
   var table = d3.select("#container4").append("table")
 
   table.attr("id", "myTable")
-    .attr('class', 'table rem');
+    .attr('class', 'table table-hover rem');
 
   // create table header
   var headers = table.append('thead').append('tr')
@@ -334,19 +354,15 @@ function draw_table(data, year, category) {
 
 }
 function mouseOver(d) {
-  var current_code = d.code;
+  current_code = d.code;
+  d3.selectAll('#' + current_code).style('fill', 'yellow');
 
-  var value = d3.select('.bar').html( function(d) { return d.countrycode });
-  console.log(value[0]);
-  if (current_code == value) {
-    console.log(current_code);
-  }
   // SELECTEREN OP VALUE EN VAN DIE DE STYLE VERANDEREN (GOOGLE)
   // d3.selectAll(.bar).attr("style")
 }
 
 function mouseOut(d) {
-
+  d3.selectAll('#' + current_code).style('fill', 'steelblue');
 }
 
 function searchFunction() {
