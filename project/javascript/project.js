@@ -18,7 +18,10 @@ var margin = {top: 50, right: 30, bottom: 30, left: 40},
 var current_category = "Obesity";
 var current_year = "2014";
 var current_code;
-
+var tip;
+var prevFill;
+var prevStroke;
+var prevStrokeWidth
 
 d3.json("data.json", function(error, data) {
   if (error) throw error;
@@ -69,6 +72,16 @@ function draw_worldmap(data, year, category){
 // select proper year and category
   data = data[year][category];
 
+  function draw_popup(data) {
+    var popup = d3.tip()
+      .attr('class', 'd3-tip')
+      .offset([-10, 0])
+      .html(function(d) {
+        return "<strong>Country:</strong> <span>" + d.country + "</span> <br/> <strong>" 
+        + variable + ":</strong> <span>" + d.value.toFixed(2) + "</span>";
+      })
+  }
+
   var map = new Datamap({element: document.getElementById('container1'),
 
     scope: 'world',
@@ -77,19 +90,15 @@ function draw_worldmap(data, year, category){
       highlightBorderColor: 'rgba(0,0,0,0.5)',
       highlightOnHover: true,
       popupOnHover: true,
-      highlightFillColor: 'fills',
+      highlightFillColor: 'yellow',
       highlightFillOpacity: 0.4,
 
       // content pop-up on hovering
       popupTemplate: function(geo, data) {
-        current_code = geo.id;
-        // if (prevFill) {
-        //   d3.select(selectorCountry).style("fill", prevFill);
-        // }
-        // selectorCountry = '.datamaps-subunit.' + current_code;
-        // prevFill = d3.selectAll(selectorCountry).style("fill")
-        // d3.selectAll(selectorCountry).style("fill", "000000")
+
         if (data) {   
+          d3.selectAll('.bar').style('fill', 'steelblue');
+          current_code = geo.id;
           d3.selectAll('#' + current_code).style('fill', 'yellow');
           if (data.number == "..") {
             return ['<div class="hoverinfo">',
@@ -127,18 +136,19 @@ function draw_worldmap(data, year, category){
     },
 
     // respond to choice of year by viewer
-    done: function(datamap) {
-      datamap.svg.selectAll('.datamaps-subunit')
-                    // .on('mouseover', function(geography) {
-                      
-                    //   d3.selectAll('.datamaps-subunit.' + current_code).style('opacity', '0.4').style('stroke', 'rgba(0,0,0,0.5)').style('stroke-width', '3');
+    // done: function(datamap) {
+      // datamap.svg.selectAll('.datamaps-subunit')
+      //               .on('mouseover', function(geography) {
+      //                 draw_popup(data); 
+      //               })
+                    //   d3.selectAll('.datamaps-subunit.' + current_code).style('opacity', '0.4').style('stroke', 'rgba(0,0,0,0.5)').style('stroke-width', '2');
                     // })
                     // .on('mouseout', function(geography) {
                     //   current_code = geography.id;
                     //   d3.selectAll('#' + current_code).style('fill', 'steelblue'); 
                     //   d3.selectAll('.datamaps-subunit.' + current_code).style('opacity', '1').style('stroke', 'rgba(255,255,255,0.3)').style('stroke-width', '1'); 
                     // });
-    },
+    // },
 
     // data to display on worldmap
     data: data    
@@ -158,19 +168,25 @@ function draw_worldmap(data, year, category){
 
   });
 
+
 }
 
-d3.select('#container1').on('mouseout', function(d) {
-  // if (d3.event.target.tagName == "circle"){
-  //   console.log(d3.select(d3.event.target).data()[0],"out")
-  console.log(d);
-  d3.selectAll('#' + current_code).style('fill', 'steelblue');
-});
 
 
-function test(d) {
-  console.log('joe');
-}
+// function popup(data, container, year, variable, category){
+//   // create tooltip
+//   // var popup = d3.tip()
+//   //       .attr('class', 'd3-tip')
+//   //       .offset([-10, 0])
+//   //       .html(function(d) {
+//   //         return "<strong>Country:</strong> <span>" + d.country + "</span> <br/> <strong>" 
+//   //         + variable + ":</strong> <span>" + d.value.toFixed(2) + "</span>";
+//   //       })
+// }
+// d3.select('#container1').on('mouseout', function(d) {
+//   console.log(d);
+//   d3.selectAll('.bar').style('fill', 'steelblue');
+// });
 
 function draw_barchart(data, container, year, variable, category){
 
@@ -198,10 +214,11 @@ function draw_barchart(data, container, year, variable, category){
       .orient("left");
 
   // create tooltip
-  var tip = d3.tip()
+  tip = d3.tip()
         .attr('class', 'd3-tip')
         .offset([-10, 0])
         .html(function(d) {
+          console.log(d)
           return "<strong>Country:</strong> <span>" + d.country + "</span> <br/> <strong>" 
           + variable + ":</strong> <span>" + d.value.toFixed(2) + "</span>";
         })
@@ -291,8 +308,16 @@ function draw_barchart(data, container, year, variable, category){
       .attr("height", function(d) { return height - y(d.value); })
       .attr("id", function(d) {  return d.countrycode })
       // show tooltip when hover over bar
-      .on('mouseover', tip.show)
-      .on('mouseout', tip.hide)
+      // .on('mouseover', tip.show)
+      // .on('mouseout', tip.hide)
+      // .on('mouseover', function(d) {
+      //   d3.selectAll('#' + d.countrycode).style('fill', 'yellow');
+      // })
+      // .on('mouseout', function(d) {
+      //   d3.selectAll('#' + d.countrycode).style('fill', 'steelblue');
+      // })
+      .on('mouseover', mouseOver)
+      .on('mouseout', mouseOut);
 
 };
 
@@ -334,18 +359,19 @@ function draw_table(data, year, category) {
   }
 
   var columns = [
-    { head: '#', cl: 'ranking', html: function(d) { return d.ranking }, code: function(d) {return d.countrycode }},
-    { head: 'Country', cl: 'country', html: function(d) { return d.country }, code: function(d) { return d.countrycode }},
-    { head: category, cl: 'number', html: function(d) {return d.number}, code: function(d) { return d.countrycode }},
+    { head: '#', cl: 'ranking', html: function(d) { return d.ranking }, countrycode: function(d) {return d.countrycode }},
+    { head: 'Country', cl: 'country', html: function(d) { return d.country }, countrycode: function(d) { return d.countrycode }},
+    { head: category, cl: 'number', html: function(d) {return d.number}, countrycode: function(d) { return d.countrycode }},
     { head: 'GDP', cl: 'GDP', html: function(d) { if (isNaN(d.GDP.toFixed(2))) {
                                                     return '<i>Unknown</i>';
                                                   } 
-                                                  return '\u0024' + d.GDP.toFixed(2) }, code: function(d) { return d.countrycode }},
+                                                  return '\u0024' + d.GDP.toFixed(2) }, countrycode: function(d) { return d.countrycode }},
     { head: 'Happiness', cl: "Happiness", html: function(d) { if (isNaN(d.Happiness.toFixed(2))) {
                                                                 return '<i>Unknown</i>';
                                                               } 
-                                                              return d.Happiness.toFixed(2) }, code: function(d) { return d.countrycode }}
+                                                              return d.Happiness.toFixed(2) }, countrycode: function(d) { return d.countrycode }}
   ];
+
 
   // create table
   var sortAscending = true;
@@ -361,6 +387,7 @@ function draw_table(data, year, category) {
                         .append('th')
                         .attr('class', function(d) { return d.cl; })
                         .text(function(d) {return d.head; })
+                        // sort rows on click in table
                         .on('click', function(d) {
                           headers.attr('class', 'header');
 
@@ -380,6 +407,7 @@ function draw_table(data, year, category) {
                 .selectAll('tr')
                 .data(dict).enter()
                 .append('tr')
+                .attr("id", function(d) { return d.countrycode; });
   rows.selectAll('td')
     .data(function(row, i) {
         return columns.map(function(c) {
@@ -399,15 +427,52 @@ function draw_table(data, year, category) {
 
 }
 function mouseOver(d) {
-  current_code = d.code;
+  current_code = d.countrycode;
+  // change color of bar
   d3.selectAll('#' + current_code).style('fill', 'yellow');
+  // tip.show();
 
-  // SELECTEREN OP VALUE EN VAN DIE DE STYLE VERANDEREN (GOOGLE)
-  // d3.selectAll(.bar).attr("style")
+  // change color of country in map
+  if (prevFill) {
+    d3.select(selectorCountry).style("fill", prevFill)
+                              .style('opacity', '1')
+                              .style('stroke', prevStroke)
+                              .style('stroke-width', prevStrokeWidth);
+  }
+  selectorCountry = '.datamaps-subunit.' + current_code;
+  try { 
+    prevFill = d3.selectAll(selectorCountry).style("fill");
+    prevStroke = d3.selectAll(selectorCountry).style("stroke");
+    prevStrokeWidth = d3.selectAll(selectorCountry).style("stroke-width");
+    prevOpacity = d3.selectAll(selectorCountry).style("opacity");
+    d3.selectAll(selectorCountry).style("fill", "yellow")
+                                  .style('opacity', '0.4')
+                                  .style('stroke', 'black')
+                                  .style('stroke-width', '2');
+  }
+  catch(TypeError) {
+    prevFill;
+  }
+
+  // highlight row in table
+  d3.select('#myTable').select('#' + current_code).style('background-color', 'grey');
+  // d3.selectAll()
 }
 
 function mouseOut(d) {
+  // change color of bar
   d3.selectAll('#' + current_code).style('fill', 'steelblue');
+  // tip.hide();
+
+  // change color of country in map
+  if (prevFill) {
+    d3.select(selectorCountry).style("fill", prevFill)
+                              .style('stroke', prevStroke)
+                              .style('stroke-width', prevStrokeWidth)
+                              .style('opacity', prevOpacity);
+  }
+  // highlight row in table
+  d3.select('#myTable').select('#' + current_code).style('background-color', 'rgba(0,0,0,0)');
 }
 
 function searchFunction() {
@@ -420,7 +485,7 @@ function searchFunction() {
 
   // Loop through all table rows, and hide those who don't match the search query
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
+    td = tr[i].getElementsByTagName("td")[1];
     if (td) {
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
         tr[i].style.display = "";

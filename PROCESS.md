@@ -203,4 +203,17 @@ Styleday to do's
 
 * Florinde: favicon ~ http://stackoverflow.com/questions/4888377/how-to-add-a-browser-tab-icon-favicon-for-a-website
 
+Mon Jan 23
 
+* daily standup: maak eerst alle bars blauw bij hover
+
+* Search bar doesn't work anymore.. And still hovering over is not fixed when trying to connect all elements. So stupid, I added ranking so the search index went from 0 to 1.
+
+* I already spent two days on the popupTemplate function, customizing this. This doesn't work, Sascha also doesn't know how to help me, so I'm gonna try to write my own popupTemplate function and not use this one from datamaps anymore.
+
+* In order to highlight table rows when hovering over the map/barcharts, I had to add an id to every row in the table. Then I change the color from the row of the selected country. Only fixed it for the barchart so far. 
+Need to figure out how to select the specific row, so the table will show that row.
+
+VRAGEN
+* Coloring the bars from world map
+* Selecting the row from world map/ bar chart
