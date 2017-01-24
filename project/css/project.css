@@ -47,9 +47,18 @@ footer {
 }
 
 #container1 {
-	width: 60%;
-	height: 780px;
-	float:left;
+	/*width: 60%;*/
+	height: 500px;
+	position: relative;
+	width: 100%;
+	/*float:left;*/
+}
+
+#container4 {
+	width: 100%;
+	height: 500px;
+	/*float: right;*/
+	overflow: scroll;
 }
 	
 /* legenda */
@@ -89,12 +98,7 @@ footer {
     margin-bottom: 12px; /* Add some space below the input */
 }
 
-#container4 {
-	width: 30%;
-	height: 680px;
-	float: right;
-	overflow: scroll;
-}
+
 
 /*Table sorting*/
 th.des:after {
@@ -115,15 +119,15 @@ th.aes:after {
 }
 
 #container2 {
-	width: 40%;
-	height: 400px;
-	float: left;
+	width: 100%;
+	height: 300px;
+	/*float: left;*/
 }
 
 #container3 {
-	width: 40%;
-	height: 400px;
-	float: right;
+	width: 100%;
+	height: 300px;
+	/*float: right;*/
 }
 
 

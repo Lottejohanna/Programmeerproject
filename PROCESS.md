@@ -209,7 +209,7 @@ Mon Jan 23
 
 * Search bar doesn't work anymore.. And still hovering over is not fixed when trying to connect all elements. So stupid, I added ranking so the search index went from 0 to 1.
 
-* I already spent two days on the popupTemplate function, customizing this. This doesn't work, Sascha also doesn't know how to help me, so I'm gonna try to write my own popupTemplate function and not use this one from datamaps anymore.
+* I already spent two days on the popupTemplate function, customizing this. This doesn't work, Sascha also doesn't know how to help me, so I'm gonna try to write my own popupTemplate function and not use this one from datamaps anymore. Did not succeed to do this. Maybe step away from the hovering idea, and use this functions on click. 
 
 * In order to highlight table rows when hovering over the map/barcharts, I had to add an id to every row in the table. Then I change the color from the row of the selected country. Only fixed it for the barchart so far. 
 Need to figure out how to select the specific row, so the table will show that row.
@@ -217,3 +217,22 @@ Need to figure out how to select the specific row, so the table will show that r
 VRAGEN
 * Coloring the bars from world map
 * Selecting the row from world map/ bar chart
+* Sorting rows in table alphabetical - New sort function?
+* Hide value in table, for sorting function - New sort function?
+
+Tue Jan 24
+
+Daily standup ~ automatic scroll function: https://www.abeautifulsite.net/smoothly-scroll-to-an-element-without-a-jquery-plugin-2
+
+How to scroll table to particular tr
+
+* Created different legends for different categories, had nothing to change for this feature. 
+* When sorting the function, want to add a very small value to the rows with no data in order to gather them and put them on the bottom of the table. However, this only works when I click a couple of times on the sort buttons. 
+
+* Started on building bigger dataset, maybe easer to see trends. Happiness is from 2008 - 2014
+** First adjusted BMI csv - take average from men/women and add countrycode
+
+# TO DO
+* Wed: Fix interactivity
+* Wed: Adjust JSON file for 2008-2014 for overweight, obesitas, BMI, GDP and happiness
+* Thur: Timeslider

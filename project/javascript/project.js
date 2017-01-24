@@ -9,8 +9,8 @@ Number: 10654976
 
 // set margin, width and height
 var margin = {top: 50, right: 30, bottom: 30, left: 40},
-    width = 960 - margin.right - margin.left, 
-    height = 450 - margin.top - margin.bottom; 
+    width = 500 - margin.right - margin.left, 
+    height = 400 - margin.top - margin.bottom; 
   
 // var current_year;
 // var current_category;
@@ -21,16 +21,18 @@ var current_code;
 var tip;
 var prevFill;
 var prevStroke;
-var prevStrokeWidth
+var prevStrokeWidth;
+var map;
 
 d3.json("data.json", function(error, data) {
   if (error) throw error;
 
   // default worldmap, barcharts and table
   draw_worldmap(data, current_year, current_category);
+  draw_table(data, '2014', 'Obesity');
   draw_barchart(data, '#container2', current_year, 'GDP', current_category);
   draw_barchart(data, '#container3', current_year, 'Happiness', current_category);
-  draw_table(data, '2014', 'Obesity');
+  
 
   // add_rank_table(data, current_year, current_category);
 
@@ -82,7 +84,7 @@ function draw_worldmap(data, year, category){
       })
   }
 
-  var map = new Datamap({element: document.getElementById('container1'),
+  map = new Datamap({element: document.getElementById('container1'),
 
     scope: 'world',
     geographyConfig: {
@@ -131,7 +133,6 @@ function draw_worldmap(data, year, category){
       C:     '#4292c6',
       D:     '#2171b5',
       E:     '#08519c', 
-      F:     '#08306b',
       defaultFill: '#bdbdbd' 
     },
 
@@ -153,23 +154,41 @@ function draw_worldmap(data, year, category){
     // data to display on worldmap
     data: data    
   });
-
+ 
   // legend of the world map
-  map.legend({
-    legendTitle: 'Percentage Obesity in the World',
-    defaultFillName: 'No Data',
-    labels: {
-      A: '0-20',
-      B: '20-40', 
-      C: '40-60',
-      D: '60-80',
-      E: '80-100'
-    }
-
-  });
-
+  draw_legend(category);
 
 }
+
+function draw_legend(category) {
+  if (category == 'BMI') {
+    map.legend({
+      legendTitle: 'Mean Body Mass Index (BMI), ages 18+, in the World',
+      defaultFillName: 'No Data',
+      labels: {
+        A: '< 22.5',
+        B: '22.5 - 25', 
+        C: '25 - 27.5',
+        D: '27.5 - 30',
+        E: '> 30'
+      }
+    });
+  }
+  else {
+    map.legend({
+      legendTitle: 'Percentage of ' + category + ', ages 18+, in the World',
+      defaultFillName: 'No Data',
+      labels: {
+        A: '< 20',
+        B: '20 - 40', 
+        C: '40 - 60',
+        D: '60 - 80',
+        E: '80 - 100'
+      }
+    });
+  }
+}
+
 
 
 
@@ -192,8 +211,8 @@ function draw_barchart(data, container, year, variable, category){
 
   // set margin, width and height
   var margin = {top: 50, right: 30, bottom: 30, left: 40},
-      width = 860 - margin.right - margin.left, 
-      height = 400 - margin.top - margin.bottom; 
+      width = 560 - margin.right - margin.left, 
+      height = 300 - margin.top - margin.bottom; 
 
   // set x-scale
   var x = d3.scale.ordinal()
@@ -361,13 +380,15 @@ function draw_table(data, year, category) {
   var columns = [
     { head: '#', cl: 'ranking', html: function(d) { return d.ranking }, countrycode: function(d) {return d.countrycode }},
     { head: 'Country', cl: 'country', html: function(d) { return d.country }, countrycode: function(d) { return d.countrycode }},
-    { head: category, cl: 'number', html: function(d) {return d.number}, countrycode: function(d) { return d.countrycode }},
+    { head: category, cl: 'number', html: function(d) { if (isNaN(d.number)) {
+                                                          return ' '; }
+                                                        return d.number }, countrycode: function(d) { return d.countrycode }},
     { head: 'GDP', cl: 'GDP', html: function(d) { if (isNaN(d.GDP.toFixed(2))) {
-                                                    return '<i>Unknown</i>';
+                                                    return ' ';
                                                   } 
                                                   return '\u0024' + d.GDP.toFixed(2) }, countrycode: function(d) { return d.countrycode }},
     { head: 'Happiness', cl: "Happiness", html: function(d) { if (isNaN(d.Happiness.toFixed(2))) {
-                                                                return '<i>Unknown</i>';
+                                                                return ' ';
                                                               } 
                                                               return d.Happiness.toFixed(2) }, countrycode: function(d) { return d.countrycode }}
   ];
@@ -391,12 +412,15 @@ function draw_table(data, year, category) {
                         .on('click', function(d) {
                           headers.attr('class', 'header');
 
+                          // add secret value to countries without data
                           if (sortAscending) {
-                            rows.sort(function(a, b) { return b[d.cl] - a[d.cl]; });
+                            rows.sort(function(a, b) { if (isNaN(a[d.cl]) || isNaN(b[d.cl]))   { return -10000000 ; } 
+                                                          console.log(b[d.cl] - a[d.cl]); return b[d.cl] - a[d.cl]; });
                             sortAscending = false;
                             this.className = 'aes';
                           } else {
-                            rows.sort(function(a, b) { return a[d.cl] - b[d.cl]; });
+                            rows.sort(function(a, b) { if (isNaN(a[d.cl]) || isNaN(b[d.cl]))   { return -10000000 ; } 
+                                                          console.log(a[d.cl] - b[d.cl]); return a[d.cl] - b[d.cl]; });
                             sortAscending = true;
                             this.className = 'des';
                           }
@@ -455,7 +479,9 @@ function mouseOver(d) {
   }
 
   // highlight row in table
-  d3.select('#myTable').select('#' + current_code).style('background-color', 'grey');
+  var row = d3.select('#myTable').select('#' + current_code);
+  row.style('background-color', 'grey');
+  // row.scrollIntoView(true);
   // d3.selectAll()
 }
 
