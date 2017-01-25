@@ -74,15 +74,8 @@ function draw_worldmap(data, year, category){
 // select proper year and category
   data = data[year][category];
 
-  function draw_popup(data) {
-    var popup = d3.tip()
-      .attr('class', 'd3-tip')
-      .offset([-10, 0])
-      .html(function(d) {
-        return "<strong>Country:</strong> <span>" + d.country + "</span> <br/> <strong>" 
-        + variable + ":</strong> <span>" + d.value.toFixed(2) + "</span>";
-      })
-  }
+  var tooltip = d3.select('#container1').append('div')
+      .attr('class', 'hidden tooltip');
 
   map = new Datamap({element: document.getElementById('container1'),
 
@@ -96,34 +89,34 @@ function draw_worldmap(data, year, category){
       highlightFillOpacity: 0.4,
 
       // content pop-up on hovering
-      popupTemplate: function(geo, data) {
+    //   popupTemplate: function(geo, data) {
 
-        if (data) {   
-          d3.selectAll('.bar').style('fill', 'steelblue');
-          current_code = geo.id;
-          d3.selectAll('#' + current_code).style('fill', 'yellow');
-          if (data.number == "..") {
-            return ['<div class="hoverinfo">',
-                    '<strong>' + geo.properties.name + '</strong><br/>',
-                    category + ': <i>Unknown</i>',
-                    '</div>'].join(''); 
-          }
-          if (category == "BMI") {
-            return ['<div class="hoverinfo">',
-                  '<strong>' + geo.properties.name + '</strong><br/>',
-                  category + ": " + data.number,
-                  '</div>'].join('');
-          }
-          return ['<div class="hoverinfo">',
-                  '<strong>' + geo.properties.name + '</strong><br/>',
-                  category + ": " + data.number + "%",
-                  '</div>'].join('');
-        }
-        return ['<div class="hoverinfo">',
-                '<strong>' + geo.properties.name + '</strong><br/>',
-                category + ': <i>Unknown</i>',
-                '</div>'].join('');       
-        }
+    //     if (data) {   
+    //       d3.selectAll('.bar').style('fill', 'steelblue');
+    //       current_code = geo.id;
+    //       d3.selectAll('#' + current_code).style('fill', 'yellow');
+    //       if (data.number == "..") {
+    //         return ['<div class="hoverinfo">',
+    //                 '<strong>' + geo.properties.name + '</strong><br/>',
+    //                 category + ': <i>Unknown</i>',
+    //                 '</div>'].join(''); 
+    //       }
+    //       if (category == "BMI") {
+    //         return ['<div class="hoverinfo">',
+    //               '<strong>' + geo.properties.name + '</strong><br/>',
+    //               category + ": " + data.number,
+    //               '</div>'].join('');
+    //       }
+    //       return ['<div class="hoverinfo">',
+    //               '<strong>' + geo.properties.name + '</strong><br/>',
+    //               category + ": " + data.number + "%",
+    //               '</div>'].join('');
+    //     }
+    //     return ['<div class="hoverinfo">',
+    //             '<strong>' + geo.properties.name + '</strong><br/>',
+    //             category + ': <i>Unknown</i>',
+    //             '</div>'].join('');       
+    //     }
     },
 
     // colors for different categories
@@ -136,20 +129,37 @@ function draw_worldmap(data, year, category){
       defaultFill: '#bdbdbd' 
     },
 
-    // respond to choice of year by viewer
-    // done: function(datamap) {
-      // datamap.svg.selectAll('.datamaps-subunit')
-      //               .on('mouseover', function(geography) {
-      //                 draw_popup(data); 
-      //               })
-                    //   d3.selectAll('.datamaps-subunit.' + current_code).style('opacity', '0.4').style('stroke', 'rgba(0,0,0,0.5)').style('stroke-width', '2');
-                    // })
-                    // .on('mouseout', function(geography) {
-                    //   current_code = geography.id;
-                    //   d3.selectAll('#' + current_code).style('fill', 'steelblue'); 
-                    //   d3.selectAll('.datamaps-subunit.' + current_code).style('opacity', '1').style('stroke', 'rgba(255,255,255,0.3)').style('stroke-width', '1'); 
-                    // });
-    // },
+    done: function(datamap, geography) {
+      datamap.svg.selectAll('.datamaps-subunit')
+        .on('mouseover', function(d) {
+
+            // change color when mouseover
+            mouseOver(d, "id");
+
+            // display tooltip when mouseover
+            var mouse = d3.mouse(this);
+            tooltip.classed('hidden', false)
+                .attr('style', 'left:' + (mouse[0] + 15) +
+                        'px; top:' + (mouse[1] - 35) + 'px')
+                .html(function() {
+                  
+                  if (data[d.id]) {
+                    return "<strong>Country:</strong> <span>" + d.properties.name + "</span> <br/> <strong>" 
+                      + category + ":</strong> <span>" + data[d.id].number + "</span>";
+                  }
+                  return "<strong>Country:</strong> <span>" + d.properties.name + "</span> <br/> <strong>" 
+                    + category + ":</strong> <span> <i>No Data</i> </span>";
+                })
+        })
+        .on('mouseout', function(d) {
+
+            // change color when mouseout
+            mouseOut(d, "id");
+
+            // hide tooltip when mouseout
+            tooltip.classed('hidden', true);
+        });
+    },
 
     // data to display on worldmap
     data: data    
@@ -157,7 +167,6 @@ function draw_worldmap(data, year, category){
  
   // legend of the world map
   draw_legend(category);
-
 }
 
 function draw_legend(category) {
@@ -188,24 +197,6 @@ function draw_legend(category) {
     });
   }
 }
-
-
-
-
-// function popup(data, container, year, variable, category){
-//   // create tooltip
-//   // var popup = d3.tip()
-//   //       .attr('class', 'd3-tip')
-//   //       .offset([-10, 0])
-//   //       .html(function(d) {
-//   //         return "<strong>Country:</strong> <span>" + d.country + "</span> <br/> <strong>" 
-//   //         + variable + ":</strong> <span>" + d.value.toFixed(2) + "</span>";
-//   //       })
-// }
-// d3.select('#container1').on('mouseout', function(d) {
-//   console.log(d);
-//   d3.selectAll('.bar').style('fill', 'steelblue');
-// });
 
 function draw_barchart(data, container, year, variable, category){
 
@@ -335,12 +326,14 @@ function draw_barchart(data, container, year, variable, category){
       // .on('mouseout', function(d) {
       //   d3.selectAll('#' + d.countrycode).style('fill', 'steelblue');
       // })
-      .on('mouseover', mouseOver)
-      .on('mouseout', mouseOut);
+      .on('mouseover', function(d) {
+        mouseOver(d, "countrycode");
+      })
+      .on('mouseout', function(d) {
+        mouseOut(d, "countrycode");
+      });
+}
 
-};
-
-// The table generation function
 function draw_table(data, year, category) {
 
   var data = data[year][category];
@@ -381,14 +374,14 @@ function draw_table(data, year, category) {
     { head: '#', cl: 'ranking', html: function(d) { return d.ranking }, countrycode: function(d) {return d.countrycode }},
     { head: 'Country', cl: 'country', html: function(d) { return d.country }, countrycode: function(d) { return d.countrycode }},
     { head: category, cl: 'number', html: function(d) { if (isNaN(d.number)) {
-                                                          return ' '; }
+                                                          return "No Data"; }
                                                         return d.number }, countrycode: function(d) { return d.countrycode }},
     { head: 'GDP', cl: 'GDP', html: function(d) { if (isNaN(d.GDP.toFixed(2))) {
-                                                    return ' ';
+                                                    return "No Data";
                                                   } 
                                                   return '\u0024' + d.GDP.toFixed(2) }, countrycode: function(d) { return d.countrycode }},
     { head: 'Happiness', cl: "Happiness", html: function(d) { if (isNaN(d.Happiness.toFixed(2))) {
-                                                                return ' ';
+                                                                return "No Data";
                                                               } 
                                                               return d.Happiness.toFixed(2) }, countrycode: function(d) { return d.countrycode }}
   ];
@@ -410,21 +403,24 @@ function draw_table(data, year, category) {
                         .text(function(d) {return d.head; })
                         // sort rows on click in table
                         .on('click', function(d) {
-                          headers.attr('class', 'header');
+                          rows.sort(function (a, b) { return a == null || b == null ? 0 : valueCompare(a[d.cl], b[d.cl]); })
+                        })
+                        // .on('click', function(d) {
+                        //   headers.attr('class', 'header');
 
-                          // add secret value to countries without data
-                          if (sortAscending) {
-                            rows.sort(function(a, b) { if (isNaN(a[d.cl]) || isNaN(b[d.cl]))   { return -10000000 ; } 
-                                                          console.log(b[d.cl] - a[d.cl]); return b[d.cl] - a[d.cl]; });
-                            sortAscending = false;
-                            this.className = 'aes';
-                          } else {
-                            rows.sort(function(a, b) { if (isNaN(a[d.cl]) || isNaN(b[d.cl]))   { return -10000000 ; } 
-                                                          console.log(a[d.cl] - b[d.cl]); return a[d.cl] - b[d.cl]; });
-                            sortAscending = true;
-                            this.className = 'des';
-                          }
-                        });
+                        //   // add secret value to countries without data
+                        //   if (sortAscending) {
+                        //     rows.sort(function(a, b) { if (isNaN(a[d.cl]) || isNaN(b[d.cl]))   { return -10000000 ; } 
+                        //                                   console.log(b[d.cl] - a[d.cl]); return b[d.cl] - a[d.cl]; });
+                        //     sortAscending = false;
+                        //     this.className = 'aes';
+                        //   } else {
+                        //     rows.sort(function(a, b) { if (isNaN(a[d.cl]) || isNaN(b[d.cl]))   { return -10000000 ; } 
+                        //                                   console.log(a[d.cl] - b[d.cl]); return a[d.cl] - b[d.cl]; });
+                        //     sortAscending = true;
+                        //     this.className = 'des';
+                        //   }
+                        // });
 
   // create table body
   var rows = table.append('tbody')
@@ -432,6 +428,8 @@ function draw_table(data, year, category) {
                 .data(dict).enter()
                 .append('tr')
                 .attr("id", function(d) { return d.countrycode; });
+                
+
   rows.selectAll('td')
     .data(function(row, i) {
         return columns.map(function(c) {
@@ -446,12 +444,37 @@ function draw_table(data, year, category) {
     .append('td')
     .html(function(d) {return d.html })
     .attr('class', function(d) {return d.cl})
-    .on('mouseover', mouseOver)
-    .on('mouseout', mouseOut);
-
+    .on('mouseover', function(d) {
+      mouseOver(d, "countrycode")
+    })
+    .on('mouseout', function(d) {
+      mouseOut(d, "countrycode");
+    });
 }
-function mouseOver(d) {
-  current_code = d.countrycode;
+
+function valueCompare(a, b) {
+    // console.log(a, isNaN(a), b, isNaN(b));
+    try {
+      a = a.toLowerCase();
+      b = b.toLowerCase();
+      return a > b ? 1 : a == b ? 0 : -1;
+    }
+
+    catch(TypeError) {
+      if (isNaN(a)) {
+        a = Infinity;
+      }
+
+      else if (isNaN(b)) {
+        b = Infinity;
+      }
+
+      return a > b ? 1 : a == b ? 0 : -1;
+    }
+}
+
+function mouseOver(d, x) {
+  current_code = d[x];
   // change color of bar
   d3.selectAll('#' + current_code).style('fill', 'yellow');
   // tip.show();

@@ -217,8 +217,7 @@ Need to figure out how to select the specific row, so the table will show that r
 VRAGEN
 * Coloring the bars from world map
 * Selecting the row from world map/ bar chart
-* Sorting rows in table alphabetical - New sort function?
-* Hide value in table, for sorting function - New sort function?
+* Main en functions of main en allemaal aparte files met functies?
 
 Tue Jan 24
 
@@ -232,7 +231,38 @@ How to scroll table to particular tr
 * Started on building bigger dataset, maybe easer to see trends. Happiness is from 2008 - 2014
 ** First adjusted BMI csv - take average from men/women and add countrycode
 
+
+Wed Jan 25
+
+* Daily standup: tekst erbij om het verhaal te vertellen
+
+* 25 min: table sort
+* 25 min: table sort
+* 25 min: table sort - problems with no data points
+* 25 min: try to make own popup template using datamaps 
+
+
+* Added new sort function, old function wasn't working properly. Check if value is a number, sort these, else change letter to uppercase in order to compare all letters in the string. Problem with the no data points. In some weird way, typeof(IsNaN) was 'number', so couldn't check if no data was a string, change this to the check if isNaN(someValue), changed that value to infinity in order to place the no data points in the table on the bottom when that specific column is sorted. However, in this way the alphabetical sort didn't work anymore, so I changed the structure of my function to a try/catch, and now it works!
+Not working table sort: http://bl.ocks.org/AMDS/4a61497182b8fcb05906
+Working sort: http://bl.ocks.org/biovisualize/1226718
+
+* 25 min: fix table sort, popup template datamaps
+* 25 min: popup template datamaps
+* 25 min: popup template datamaps
+* 25 min: popup template datamaps
+
+* 25 min: popup template datamaps
+
+* Fixed popup on hover on map, finally! Source: http://bl.ocks.org/lhoworko/7753a11efc189a936371. Only problem are the countries where the id in datamaps is '#-99', have to fix that tomorrow.
+
+Thu Jan 26
+
+* TO DO
 # TO DO
-* Wed: Fix interactivity
+* Wed: Fix interactivity ~ countries without countrycode
 * Wed: Adjust JSON file for 2008-2014 for overweight, obesitas, BMI, GDP and happiness
 * Thur: Timeslider
+* Fix tableheaders, always display them even when using the scrollbar
+
+
+
