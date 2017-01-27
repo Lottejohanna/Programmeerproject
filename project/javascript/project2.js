@@ -9,43 +9,34 @@ Number: 10654976
 
 // set margin, width and height
 var margin = {top: 50, right: 30, bottom: 30, left: 40},
-    width = 560 - margin.right - margin.left, 
-    height = 300 - margin.top - margin.bottom; 
+    width = 500 - margin.right - margin.left, 
+    height = 400 - margin.top - margin.bottom; 
   
 // var current_year;
 // var current_category;
 
 var current_category = "Obesity";
 var current_year = "2014";
-var current_variable_bar = 'GDP';
-var current_variable_scatter = 'Happiness';
-var currentColor = "#f0f0f0";
 var current_code;
 var tip;
 var prevFill;
 var prevStroke;
 var prevStrokeWidth;
 var map;
-var currentID, currentClass, newClass;
 
 d3.json("data.json", function(error, data) {
   if (error) throw error;
 
-  // default button color
-  d3.selectAll('.btn.btn-default').style("background-color", currentColor);
-
   // default worldmap, barcharts and table
   draw_worldmap(data, current_year, current_category);
-  draw_table(data, current_year, current_category);
-  draw_barchart(data, current_year, current_variable_bar, current_category);
-  draw_scatterplot (data, current_year, current_category, current_variable_scatter);
-
+  draw_table(data, '2014', 'Obesity');
+  draw_barchart(data, '#container2', current_year, 'GDP', current_category);
+  draw_barchart(data, '#container3', current_year, 'Happiness', current_category);
 
   // draw graphs after chosen year
-  d3.selectAll(".btn.btn-default.map")
+  d3.selectAll(".btn.btn-default")
     .on("click", function() {
-      buttonColor(this);
-
+      // d3.select(".datamaps-legend").remove()
       d3.select(".datamap").remove()
       d3.select('.datamaps-legend').remove()
       d3.selectAll(".rem").remove()
@@ -53,48 +44,23 @@ d3.json("data.json", function(error, data) {
       current_year = this.getAttribute("value");
 
       draw_worldmap(data, current_year, current_category);
-      draw_barchart(data, current_year, current_variable_bar, current_category);
+      draw_barchart(data, '#container2', current_year, 'GDP', current_category);
+      draw_barchart(data, '#container3', current_year, 'Happiness', current_category);
       draw_table(data, current_year, current_category);
-      draw_scatterplot (data, current_year, current_category, current_variable_scatter);
-    });
-
-  d3.selectAll(".btn.btn-default.bar")
-    .on("click", function() {
-      // d3.select(this).style('background-color', 'pink');
-      buttonColor(this);
-
-      d3.selectAll(".barchart.rem").remove()
-
-      current_variable_bar = this.getAttribute("value");
-
-      draw_barchart(data ,current_year, current_variable_bar, current_category);
-    });
-
-  d3.selectAll(".btn.btn-default.scatter")
-    .on("click", function() {
-      buttonColor(this);
-      d3.selectAll(".scatter.rem").remove()
-
-      current_variable_scatter = this.getAttribute("value");
-      // console.log(current_category);
-
-      draw_scatterplot (data, current_year, current_category, current_variable_scatter);
     });
 
   d3.selectAll(".m")
     .on("click", function() {
-      d3.select('.datamap').remove();
-      d3.select('.datamaps-legend').remove();
+      d3.select('.datamap').remove()
+      d3.select('.datamaps-legend').remove()
       d3.selectAll(".table.rem").remove();
-      d3.selectAll(".scatter.rem").remove()
 
+      // var year = d3.selectAll(".btn.btn-default");
       current_category = this.getAttribute("value");
 
       draw_worldmap(data, current_year, current_category);
       draw_table(data, current_year, current_category);
-      draw_scatterplot (data, current_year, current_category, current_variable_scatter);
     });
-
   
 });
 
@@ -191,7 +157,12 @@ function draw_legend(category) {
   }
 }
 
-function draw_barchart(data, year, variable, category){
+function draw_barchart(data, container, year, variable, category){
+
+  // set margin, width and height
+  var margin = {top: 50, right: 30, bottom: 30, left: 40},
+      width = 560 - margin.right - margin.left, 
+      height = 300 - margin.top - margin.bottom; 
 
   // set x-scale
   var x = d3.scale.ordinal()
@@ -211,16 +182,16 @@ function draw_barchart(data, year, variable, category){
       .scale(y)
       .orient("left");
 
-  var tooltip = d3.select('#container2').append('div')
+  var tooltip = d3.select(container).append('div')
       .attr('class', 'hidden tooltip');
   
   // create svg
-  var chart = d3.select('#container2').append("svg")
+  var chart = d3.select(container).append("svg")
     .attr("class", "barchart rem")
         // .attr("width", width + margin.left + margin.right)
         // .attr("height", height + margin.top + margin.bottom)
-      .attr("width", "100%")
-      .attr("height", 400)
+        .attr("width", "100%")
+        .attr("height", 400)
       .append("g")
       .attr("transform", "translate(" + 2 * margin.left + "," + margin.top + ")");
 
@@ -367,6 +338,7 @@ function draw_table(data, year, category) {
                                                               return d.Happiness.toFixed(2) }, countrycode: function(d) { return d.countrycode }}
   ];
 
+
   // create table
   var sortAscending = true;
   var table = d3.select("#container4").append("table")
@@ -430,158 +402,6 @@ function draw_table(data, year, category) {
     .on('mouseout', function(d) {
       mouseOut(d, "countrycode");
     });
-}
-
-function draw_scatterplot (data, year, category, variable) {
-
-  var data = data[year][category];
-
-  var dict = [];
-  for (var key in data) {
-
-    dict.push( { country: data[key].country,
-                countrycode: data[key].countrycode,
-                number: +data[key].number,
-                GDP: +data[key].GDP,
-                Happiness: +data[key].Happiness,
-                fillKey: data[key].fillKey });
-  }
-
-  // sort dictionary from biggest to lowest value of category
-  var top = dict.sort(function(a, b) { return a[variable] < b[variable] ? 1 : -1; })
-                .slice(0, dict.length);
-
-  // append ranking number to dictionary
-  for (i = 0; i < dict.length; i++) { 
-    dict[i].ranking = i + 1;
-  }
-
-  var tooltip = d3.select('#container3').append('div')
-      .attr('class', 'hidden tooltip');
-
-  // ordinal colorscale
-  var colors = d3.scale.category10();
-
-  var scatter = d3.select('#container3').append('svg')
-    .attr('class', 'scatter rem')
-    .attr('height', 400)
-    .attr('width', '100%')
-    .append('g')
-    .attr('transform', 'translate(' + 2 * margin.left + ',' + margin.top + ')');
-
-  var x = d3.scale.linear()
-    .domain(d3.extent(dict, function(d) {
-      return d.number;
-    }))
-    // .range([0, width - margin.left - margin.right]);
-    .range([0, width]);
-
-  var y = d3.scale.linear()
-    .domain(d3.extent(dict, function(d) {
-      return d[variable];   
-    }))
-    // .range([height - margin.top - margin.bottom, 0]);
-    .range([height, 0]);
-
-  scatter.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")");
-  
-  scatter.append("g")
-    .attr("class", "y axis")
-    // create label for y-axis
-    .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text(function() {if (variable == "GDP") { 
-                          return "GDP per capita (\u0024)"; }
-                        return "Happiness rate"; 
-                        });
-
-  var xAxis = d3.svg.axis().scale(x).orient("bottom").tickPadding(2);
-  var yAxis = d3.svg.axis().scale(y).orient("left").tickPadding(2);
-
-  scatter.selectAll("g.y.axis").call(yAxis);
-  scatter.selectAll("g.x.axis").call(xAxis);
-
-  // // create x axis
-  // chart.append("g")
-  //     .attr("class", "x axis rem")
-  //     .attr("transform", "translate(0," + height + ")")
-  //     .call(xAxis)
-  //     .selectAll("text")
-  //       .style("display", "none");
-        
-  // create title
-  scatter.append("text")
-    .attr("class", "toptitle rem")
-    .attr("x", margin.left)             
-    .attr("y", 0 - margin.top/4)
-    .attr("text-anchor", "middle")   
-    .text(function() {if (variable == "GDP") { 
-                        return "GDP vs. " + category; }                      
-                      return "Happiness vs. " + category;; 
-                      });
-
-  var country = scatter.selectAll("g.node")
-    .data(dict, function (d) {
-      return d.country;
-    });
-
-  var countryGroup = country.enter().append("g")
-    .attr("class", "node")
-    .attr('transform', function (d) {
-        return "translate(" + x(d.number) + "," + y(d[variable]) + ")";
-    });
-
-  countryGroup.append("circle")
-        .attr("r", 2)
-        .attr("class", "dot")
-        .attr("id", function(d) {  return d.countrycode })
-        // .style('fill', 'pink');
-        .style("fill", function (d) {
-            return colors(d.fillKey);
-        })
-        .on('mouseover', function(d) {
-
-        mouseOver(d, "countrycode");
-
-        // display tooltip when mouseover
-        var mouse = d3.mouse(this);
-        tooltip.classed('hidden', false)
-            .attr('style', 'left:' + (mouse[0] + 15) +
-                    'px; top:' + (mouse[1] - 35) + 'px')
-            .html(function() {
-                if (variable == 'GDP') {
-                  return "<strong>Country:</strong> <span>" + d.country + " </span> <br/> <strong>" 
-                  + variable + ":</strong> <span> \u0024" + d[variable].toFixed(2) + "</span> <br/> <strong>" 
-                  + category + ":</strong> <span>" + d.number + "</span>";
-                }
-
-              return "<strong>Country:</strong> <span>" + d.country + " </span> <br/> <strong>" 
-                + variable + ":</strong> <span>" + d[variable].toFixed(1) + "</span> <br/> <strong>" 
-                + category + ":</strong> <span>" + d.number + "</span>";            
-            })
-      })
-      .on('mouseout', function(d) {
-
-        mouseOut(d, "countrycode");
-
-        // hide tooltip when mouseout
-        tooltip.classed('hidden', true);
-      });
-
-  // countryGroup.append("text")
-  //     .style("text-anchor", "middle")
-  //     .attr("dy", -10)
-  //     .text(function (d) {
-  //         // this shouldn't be a surprising statement.
-  //         return d.country;
-  // });
-
-
 }
 
 function valueCompare(a, b) {
@@ -675,36 +495,6 @@ function searchFunction() {
     } 
   }
 }
-
-function buttonColor(element) {
-  var currentClass = element.getAttribute("class");
-  currentColor = d3.select(element).style("background-color");
-  console.log(currentColor);
-  console.log(currentClass, newClass)
-  if (currentClass = newClass) {
-    d3.select(currentID).style("background-color", '#f0f0f0');
-  }
-
-  currentID = '#' + element.getAttribute("id");
-  newClass = element.getAttribute("class");
-
-  // d3.select(currentID).style("background-color", currentColor);
-  if (currentColor == '#f0f0f0') {
-    currentColor = 'steelblue';
-    return d3.select(currentID).style("background-color", currentColor); 
-  }
-
-  
-  // currentColor = 'red';
-  // currentColor = currentColor == "red" ? "blue" : "red";
-  // return d3.select(element).style("background-color", currentColor); 
-  // currentColor = currentColor == "red" ? "blue" : "red";
-  // console.log('2', currentColor);    
-  // d3.select(element).style("background-color", currentColor);
-  // console.log('3', d3.select(element).style("background-color"));
-  
-}
-
 
 function updateData() {}
 

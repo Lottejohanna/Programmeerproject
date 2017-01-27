@@ -217,7 +217,7 @@ Need to figure out how to select the specific row, so the table will show that r
 VRAGEN
 * Coloring the bars from world map
 * Selecting the row from world map/ bar chart
-* Main en functions of main en allemaal aparte files met functies?
+* Main en functions of main en allemaal aparte files met functies? ~ Allemaal aparte bestanden met functies erin
 
 Tue Jan 24
 
@@ -257,12 +257,47 @@ Working sort: http://bl.ocks.org/biovisualize/1226718
 
 Thu Jan 26
 
-* TO DO
 # TO DO
 * Wed: Fix interactivity ~ countries without countrycode
 * Wed: Adjust JSON file for 2008-2014 for overweight, obesitas, BMI, GDP and happiness
 * Thur: Timeslider
-* Fix tableheaders, always display them even when using the scrollbar
 
+
+
+* Changed the country ID's of -99 in my worldmap.min.js file from -99 tot A-99. No errors anymore, now I only have to add that the color of the country changes back once hovered over. Only problem is somaliland, gonna ask the tutors. Fixed the problem by giving all the countries their own ID. (Kosovo, Somaliland, Nothern Cyprus)
+
+* Popup when hovering over barchart has the same problem as the worldmap. Cannot use the function d3-tip, so I have to create my own tooltip just as I did with the worldmap.
+
+* 25 min: fix country ID's -99
+* 25 min: hover bar chart
+* 25 min: hover bar chart
+* 25 min: onclick -> go to table - FAILED
+
+Daily standup: 
+* Change ID for countries in worldmap.min.js: countries u don't use ~ AAA, other countries check country code.
+* When clicked on button, make button grey. 
+
+Change of plans. Currently I have 2 barcharts, but I'm gonna change this to 1 barchart and 1 scatterplot.
+Source: https://jsfiddle.net/eamonnmag/Q567s/
+
+* 25 min: scatterplot
+* 25 min: scatterplot
+* 25 min: scatterplot
+
+I fixed the scatterplot, however the interactivity is not working on this plot yet.
+
+Fri Jan 27
+
+* Fixed the scatterplot, however the popup pops up on a very weird place. Also, the circles are so small that it is not noticable which dot colors yellow when you hover over it. Super easy, because I already did all those things before for other visualizations. 
+
+* First I had 1 button group for both the barchart and the scatterplot, but then it was not possible to resemble gdp with happiness and vice versa in these two graphs. So Florinde said to me make 2 button groups,  one for the visualizations each. So I fixed this, now I have 1 dropdown and 1 buttongroup for the worldmap, and also one buttongroup for the barchart and the scatterplot eacht.
+
+TO DO:
+* Fix tableheaders, always display them even when using the scrollbar
+* Change colors scatterplot
+* On click, scroll to row in table
+* Change the colors of the buttons ~ http://stackoverflow.com/questions/10939082/d3-javascript-alternate-colors-on-click
+
+* Change colors of the buttons - Didn't work, couldn't fix that the color stays the same if you push on a button of an other visualization than the previous one.
 
 
