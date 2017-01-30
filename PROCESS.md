@@ -300,4 +300,23 @@ TO DO:
 
 * Change colors of the buttons - Didn't work, couldn't fix that the color stays the same if you push on a button of an other visualization than the previous one.
 
+Mon Jan 30
+
+25 min: button
+25 min: hover scatter 	
+25 min: button
+25 min: button - didn't work
+
+25 min: questions Tim: popup on scatterplot ~ problem is the mouse(this), takes mousecoordinates of dots
+						no data points scatter: remove them from dictionary
+						Button: value 0 or 1
+25 min: fixed the popup on hover of the scatterplot, and the no data points.
+
+No data points in scatter: removed countries with no information about the GDP/Happiness from the dictionary used for the scatterplot. Otherwise you get very weird points in the top-left corner of the scatterplot. 
+
+Popup on scatter: Placed the tooltip on the bottomright corner of the scatterplot. If I have time left, I will change this.
+
+Button: fixed the button problem, changed the id's and values of the buttons. The value is now either 0 or 1. And the id is # + map/bar/scatter + 0/1. The only thing I need to fix is the default color.
+
+
 

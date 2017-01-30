@@ -19,20 +19,23 @@ var current_category = "Obesity";
 var current_year = "2014";
 var current_variable_bar = 'GDP';
 var current_variable_scatter = 'Happiness';
-var currentColor = "#f0f0f0";
 var current_code;
 var tip;
 var prevFill;
 var prevStroke;
 var prevStrokeWidth;
 var map;
-var currentID, currentClass, newClass;
+var currentID, newClass, oldID, currentClass, oldClass;
+
+var years = ['2010', '2014'];
+var variables = ['GDP', 'Happiness'];
+
 
 d3.json("data.json", function(error, data) {
   if (error) throw error;
 
   // default button color
-  d3.selectAll('.btn.btn-default').style("background-color", currentColor);
+  d3.selectAll('.btn.btn-default').style("background-color", 'rgb(240, 240, 240');
 
   // default worldmap, barcharts and table
   draw_worldmap(data, current_year, current_category);
@@ -50,7 +53,8 @@ d3.json("data.json", function(error, data) {
       d3.select('.datamaps-legend').remove()
       d3.selectAll(".rem").remove()
 
-      current_year = this.getAttribute("value");
+      var indexYears = this.getAttribute("value");
+      current_year = years[indexYears];
 
       draw_worldmap(data, current_year, current_category);
       draw_barchart(data, current_year, current_variable_bar, current_category);
@@ -65,7 +69,8 @@ d3.json("data.json", function(error, data) {
 
       d3.selectAll(".barchart.rem").remove()
 
-      current_variable_bar = this.getAttribute("value");
+      var indexBars = this.getAttribute("value");
+      current_variable_bar = variables[indexBars];
 
       draw_barchart(data ,current_year, current_variable_bar, current_category);
     });
@@ -75,7 +80,8 @@ d3.json("data.json", function(error, data) {
       buttonColor(this);
       d3.selectAll(".scatter.rem").remove()
 
-      current_variable_scatter = this.getAttribute("value");
+      var indexScatter = this.getAttribute("value");
+      current_variable_scatter = variables[indexScatter];
       // console.log(current_category);
 
       draw_scatterplot (data, current_year, current_category, current_variable_scatter);
@@ -439,12 +445,15 @@ function draw_scatterplot (data, year, category, variable) {
   var dict = [];
   for (var key in data) {
 
-    dict.push( { country: data[key].country,
-                countrycode: data[key].countrycode,
-                number: +data[key].number,
-                GDP: +data[key].GDP,
-                Happiness: +data[key].Happiness,
-                fillKey: data[key].fillKey });
+    if (!isNaN(+data[key].Happiness) && !isNaN(+data[key].GDP)) {
+
+      dict.push( { country: data[key].country,
+                  countrycode: data[key].countrycode,
+                  number: +data[key].number,
+                  GDP: +data[key].GDP,
+                  Happiness: +data[key].Happiness,
+                  fillKey: data[key].fillKey });
+    }
   }
 
   // sort dictionary from biggest to lowest value of category
@@ -533,26 +542,27 @@ function draw_scatterplot (data, year, category, variable) {
   var countryGroup = country.enter().append("g")
     .attr("class", "node")
     .attr('transform', function (d) {
-        return "translate(" + x(d.number) + "," + y(d[variable]) + ")";
+        return "translate(" + x(d.number) + "," + y(d[variable]) + ")";     
     });
 
   countryGroup.append("circle")
         .attr("r", 2)
         .attr("class", "dot")
-        .attr("id", function(d) {  return d.countrycode })
-        // .style('fill', 'pink');
-        .style("fill", function (d) {
-            return colors(d.fillKey);
-        })
+        .attr("id", function(d) {  return 'scatter' + d.countrycode })
+        .style('fill', 'steelblue')
+        // .style("fill", function (d) {
+        //     return colors(d.fillKey);
+        // })
         .on('mouseover', function(d) {
 
         mouseOver(d, "countrycode");
 
         // display tooltip when mouseover
+        var mouseCoordinates = d3.select('svg.scatter');
         var mouse = d3.mouse(this);
         tooltip.classed('hidden', false)
-            .attr('style', 'left:' + (mouse[0] + 15) +
-                    'px; top:' + (mouse[1] - 35) + 'px')
+            .attr('style', 'left:' + (mouse[0] + width/1.3) +
+                    'px; top:' + (mouse[1] + height/1.3) + 'px')
             .html(function() {
                 if (variable == 'GDP') {
                   return "<strong>Country:</strong> <span>" + d.country + " </span> <br/> <strong>" 
@@ -630,9 +640,14 @@ function mouseOver(d, x) {
   }
 
   // change color of bar
-  // if (current_code != 'AAA') {
   d3.selectAll('#' + current_code).style('fill', 'yellow');
-  // }
+  // 
+
+  // change dot in scatterplot
+  d3.selectAll('#scatter' + current_code)
+    .attr('r', 8)
+    .style('fill', 'yellow');
+
   // highlight row in table
   var row = d3.select('#myTable').select('#' + current_code);
   row.style('background-color', 'grey');
@@ -643,6 +658,11 @@ function mouseOver(d, x) {
 function mouseOut(d) {
   // change color of bar
   d3.selectAll('#' + current_code).style('fill', 'steelblue');
+
+  // change dot in scatterplot
+  d3.selectAll('#scatter' + current_code)
+    .attr('r', 2)
+    .style('fill', 'steelblue');
 
   // change color of country in map
   if (prevFill) {
@@ -677,31 +697,26 @@ function searchFunction() {
 }
 
 function buttonColor(element) {
+
+  var currentValue = element.getAttribute("value");
   var currentClass = element.getAttribute("class");
-  currentColor = d3.select(element).style("background-color");
-  console.log(currentColor);
-  console.log(currentClass, newClass)
-  if (currentClass = newClass) {
-    d3.select(currentID).style("background-color", '#f0f0f0');
+  var currentID = '#' + currentClass.split(" ")[2]
+
+  console.log(d3.select(element).style("background-color"));
+  // if button is red
+  if ((currentValue == 0) && (d3.select(element).style("background-color") == 'rgb(240, 240, 240)')) {
+    // change color of pushed button to blue 
+    d3.select(currentID + '0').style("background-color", 'rgb(189, 189, 189)');
+    // change color of other button to red
+    d3.select(currentID + '1').style("background-color", 'rgb(240, 240, 240)');
   }
 
-  currentID = '#' + element.getAttribute("id");
-  newClass = element.getAttribute("class");
-
-  // d3.select(currentID).style("background-color", currentColor);
-  if (currentColor == '#f0f0f0') {
-    currentColor = 'steelblue';
-    return d3.select(currentID).style("background-color", currentColor); 
+  else {
+    // change color of pushed button to blue 
+    d3.select(currentID + '1').style("background-color", 'rgb(189, 189, 189)');
+    // change color of other button to red
+    d3.select(currentID + '0').style("background-color", 'rgb(240, 240, 240)');
   }
-
-  
-  // currentColor = 'red';
-  // currentColor = currentColor == "red" ? "blue" : "red";
-  // return d3.select(element).style("background-color", currentColor); 
-  // currentColor = currentColor == "red" ? "blue" : "red";
-  // console.log('2', currentColor);    
-  // d3.select(element).style("background-color", currentColor);
-  // console.log('3', d3.select(element).style("background-color"));
   
 }
 
