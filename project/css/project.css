@@ -76,8 +76,8 @@ div.tooltip {
 /* legenda */
 
 .datamaps-legend {
-	text-align: center;
-	position: relative;
+	/*text-align: center;*/
+	position: fixed;
   	top: 10px;
   	margin-left: 10%;
   	bottom: 565px;
@@ -86,10 +86,13 @@ div.tooltip {
 
 .datamaps-legend h2 {
 	font-size: 20px;
+	/*margin-right: 300px;*/
 }
 
 .datamaps-legend dl {
-	margin-left: 80px;
+	margin-left: 30px;
+	/*text-align: center;*/
+	/*text-anchor: right;*/
 }
 
 /*dropdown menu*/
@@ -183,7 +186,10 @@ label {
 	right: 10px;
 }
 
-/*.btn.btn-default {
-	background: rgb(240, 240, 240);
-}*/
+.source a {
+	font-size: 11px;
+	/*stroke: #8c8c8c;*/
+	stroke: #999999;
+	stroke-width: 0.4;
+}
 

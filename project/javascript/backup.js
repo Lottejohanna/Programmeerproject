@@ -25,7 +25,8 @@ var prevFill;
 var prevStroke;
 var prevStrokeWidth;
 var map;
-var currentID, newClass, oldID, currentClass, oldClass;
+var currentID, currentClass;
+var hoverColor = '#fdae61';
 
 var years = ['2010', '2014'];
 var variables = ['GDP', 'Happiness'];
@@ -36,6 +37,7 @@ d3.json("data.json", function(error, data) {
 
   // default button color
   d3.selectAll('.btn.btn-default').style("background-color", 'rgb(240, 240, 240');
+  d3.selectAll('.btn.btn-default.start').style("background-color", 'rgb(189, 189, 189');
 
   // default worldmap, barcharts and table
   draw_worldmap(data, current_year, current_category);
@@ -47,6 +49,7 @@ d3.json("data.json", function(error, data) {
   // draw graphs after chosen year
   d3.selectAll(".btn.btn-default.map")
     .on("click", function() {
+
       buttonColor(this);
 
       d3.select(".datamap").remove()
@@ -64,7 +67,7 @@ d3.json("data.json", function(error, data) {
 
   d3.selectAll(".btn.btn-default.bar")
     .on("click", function() {
-      // d3.select(this).style('background-color', 'pink');
+
       buttonColor(this);
 
       d3.selectAll(".barchart.rem").remove()
@@ -77,18 +80,20 @@ d3.json("data.json", function(error, data) {
 
   d3.selectAll(".btn.btn-default.scatter")
     .on("click", function() {
+
       buttonColor(this);
-      d3.selectAll(".scatter.rem").remove()
+
+      d3.selectAll(".scatter.rem").remove();
 
       var indexScatter = this.getAttribute("value");
       current_variable_scatter = variables[indexScatter];
-      // console.log(current_category);
 
       draw_scatterplot (data, current_year, current_category, current_variable_scatter);
     });
 
   d3.selectAll(".m")
     .on("click", function() {
+
       d3.select('.datamap').remove();
       d3.select('.datamaps-legend').remove();
       d3.selectAll(".table.rem").remove();
@@ -630,8 +635,8 @@ function mouseOver(d, x) {
     prevStroke = d3.selectAll(selectorCountry).style("stroke");
     prevStrokeWidth = d3.selectAll(selectorCountry).style("stroke-width");
     prevOpacity = d3.selectAll(selectorCountry).style("opacity");
-    d3.selectAll(selectorCountry).style("fill", "yellow")
-                                  .style('opacity', '0.4')
+    d3.selectAll(selectorCountry).style("fill", "#fdae61")
+                                  .style('opacity', '0.8')
                                   .style('stroke', 'black')
                                   .style('stroke-width', '2');
   }
@@ -640,19 +645,19 @@ function mouseOver(d, x) {
   }
 
   // change color of bar
-  d3.selectAll('#' + current_code).style('fill', 'yellow');
+  d3.selectAll('#' + current_code).style('fill', '#fdae61');
   // 
 
   // change dot in scatterplot
   d3.selectAll('#scatter' + current_code)
     .attr('r', 8)
-    .style('fill', 'yellow');
+    .style('fill', '#fdae61');
 
   // highlight row in table
   var row = d3.select('#myTable').select('#' + current_code);
-  row.style('background-color', 'grey');
+  row.style('background-color', '#fdae61');
   // row.scrollIntoView(true);
-  // d3.selectAll()
+
 }
 
 function mouseOut(d) {
@@ -672,7 +677,8 @@ function mouseOut(d) {
                               .style('opacity', prevOpacity);
   }
   // highlight row in table
-  d3.select('#myTable').select('#' + current_code).style('background-color', 'rgba(0,0,0,0)');
+  d3.select('#myTable').select('#' + current_code)
+    .style('background-color', 'rgba(0,0,0,0)');
 }
 
 function searchFunction() {
@@ -720,11 +726,6 @@ function buttonColor(element) {
   
 }
 
-
-function updateData() {}
-
-function connect_visulalisation() {}
-// function draw_table(data){};
 
 
 

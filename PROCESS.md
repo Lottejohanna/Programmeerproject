@@ -318,5 +318,19 @@ Popup on scatter: Placed the tooltip on the bottomright corner of the scatterplo
 
 Button: fixed the button problem, changed the id's and values of the buttons. The value is now either 0 or 1. And the id is # + map/bar/scatter + 0/1. The only thing I need to fix is the default color.
 
+Tue Feb 1
 
+* Fixed the buttons
+* Split all the files
+* Fixed variableNames and functionNames
+* Added sources and axes labels
+
+To Do:
+* transitions
+* pop up scatterplot
+* text info
+* Report
+* Daily standup pictures
+* order repository
+* tooltip
 
