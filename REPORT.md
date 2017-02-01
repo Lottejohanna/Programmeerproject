@@ -1,252 +1,31 @@
+Create the final report
+Create a report (REPORT.md), based on your design document, containing important decisions that you’ve made, e.g. where you changed your mind during the past weeks. This is how you show the reviewer that you actually understand what you have done.
+
+Start with a short description of your application (like in the README.md, but very short, including a single screen shot).
+
+Clearly describe the technical design: how is the functionality implemented in your code? This should be like your DESIGN.md but updated to reflect the final application. First, give a high level overview, which helps us navigate and understand the total of your code (which components are there?). Second, go into detail, and describe the modules/classes and how they relate.
+
+Clearly describe challenges that your have met during development. Document all important changes that your have made with regard to your design document (from the PROCESS.md). Here, we can see how much you have learned in the past month.
+
+Defend your decisions by writing an argument of a most a single paragraph. Why was it good to do it different than you thought before? Are there trade-offs for your current solution? In an ideal world, given much more time, would you choose another solution?
+
+Make sure the document is complete and reflects the final state of the application. The document will be an important part of your grade.
+
 # Report
 
-## Week 1 Dag 1 - woensdag 11 januari
+## Description
 
-![Selfie dag 1](doc/)
+The prosperity of a country, commonly measured in terms of its annual per capita Gross Domestic Product (GDP), might have different relationships with the body weight and happiness of a population. In this visualization I want to show if there are any trends detectable examining these variables. I want to examine if there is a relationship between a healthy body weight and a certain level of income and happiness. 
 
-**Aanwezig:** Isa Leijdekkers, ShanLi Nio, Lotte Slim, Eline Jacobse en Jan Maarten de Vries  
+On the top left corner a worldmap is displayed, visualizing data from the World Health Organization about the BMI and the percentage of obesity and overweight in different countries. Using a dropdown menu the user can toggle between these three different categories. The title and the legend are adjusted according to the category the user has chosen. If the user hovers over a specific country a tooltip is shown where the name of the country and the exact number of the chosen category is shown. I have used a sequential color scheme, where the higher the BMI or the percentage overweight or obesity, the darker the country is colored. Also, the user can select either the year 2010 or 2014 by clicking on one of the buttons next to the dropdown menu. The default setting is the category obesity in 2014. 
+On the bottom left corner a barchart is displayed, either visualizing data about the GDP per capita per country (default setting) from the World Databank or data about the level of happiness from Wikipedia. The user is able to switch between these two by clicking on one of the two buttons. The bars are sorted from highest to lowest and if you hover over a specific country the name of that country and the level of GDP/Happiness is displayed. The two buttons for the different years (2010 & 2014) also apply on the barchart.
+On the bottom right corner a scatterplot is displayed, either visualizing data about the level of happiness per country (default setting) or data about the GDP per Capita, both versus the selected weight category by using the dropdownmenu on the top left corner of the page. The same hover features and year options as for the barchart apply on the scatterplot.
+Lastly, on the top right corner all the data is collectively shown in a table. In this table you can look for a specific country and sort every column from lowest to highest.
+All the visualizations are connected with each other: if you hover over a specific country in one of these four visualization, the specific country will change color in every single visualization. 
 
+![](doc/report1.png)
 
-Vandaag hebben we onze eerste ideeën aan elkaar voorgelegd aan de hand van de gemaakte schetsen. Om de beurt hebben we het voorlopige plan in detail beschreven in ongeveer 4 minuten. Hierna heeft iedereen in de groep hier op gereageerd. We hebben de sterke punten besproken en natuurlijk ook de verbeterpunten genoemd. We hebben elkaar geholpen om het eerste plan aan te scherpen en gezorgd dat iedereen een plan heeft om mee aan de slag te gaan die aan de eisen van de opdracht voldoet.
+## Technical Design
+* High level overview
 
-
-## Week 1 Dag 2 - donderdag 12 januari 
-
-![Selfie dag 2](doc/)
-
-**Aanwezig:** Isa Leijdekkers, ShanLi Nio, Lotte Slim en Eline Jacobse.
-**Afwezig:** Jan Maarten de Vries  
-
-
-Iedereen heeft vandaag een update gegeven van aanpassingen die ze hebben gedaan aan hun idee van gisteren. We hebben kort verteld wat we vandaag voor ons prototype en het formatteren van de datasets van plan zijn. 
-Na elke update hebben we elkaar technische tips gegeven over verschillende onderdelen van de visualisaties die we willen maken. 
-
-
-## Week 2 Dag 1 - maandag 16 januari 
-
-![Selfie dag 3](doc/)
-
-**Aanwezig:** Isa Leijdekkers, ShanLi Nio, Lotte Slim, Eline Jacobse en Jan Maarten de Vries
-
-Vandaag heeft iedereen een plan gemaakt wat hij/zij deze week af wil hebben, welke veranderingen er zijn bedacht en welke problemen zich al hebben voorgedaan tijdens de implementatie. Verder hebben we elkaar tips gegeven over hoe sommige van deze problemen opgelost kunnen worden. Ook hebben we met elkaar besproken hoe de indeling van de uiteindelijke repository eruit moet komen te zien.
-
-
-
-
-## Week 2 Dag 2 - dinsdag 17 januari 
-
-![Selfie dag 4](doc/)
-
-**Aanwezig:** Isa Leijdekkers, ShanLi Nio, Lotte Slim, Eline Jacobse 
-**Afwezig** Jan Maarten de Vries
-
-Vandaag heeft iedereen laten zien wat zij gister gedaan heeft. Eline heeft de wereldkaart af, en bij Nederland is ze al ver. Het doel vandaag is de twee kaarten af hebben voor morgen. 
-Isa heeft een bar chart gemaakt, alleen de tekst wordt nog niet helemaal mooi weergegeven op haar x-as. Lotte heeft haar worldmap en bar charts gemaakt. ShanLi heeft haar wereldkaart en bar chart af, ze wil alleen nog dat de kleuren uit de wereldkaart ook in haar bar chart te zien zijn. Vandaag gaat ze aan haar supervisualisatie beginnen. 
-
-## Week 2 Dag 3 - woensdag 18 januari
-
-![Selfie dag 5](doc/)
-
-**Aanwezig:** Isa Leijdekkers, ShanLi Nio, Lotte Slim, Eline Jacobse 
-**Afwezig** Jan Maarten de Vries
-
-We hebben gewerkt aan onze styleguide.
-
-## Week 2 Dag 4 - donderdag 19 januari
-
-![Selfie dag 6](doc/)
-
-**Aanwezig:** Isa Leijdekkers, ShanLi Nio, Lotte Slim, Eline Jacobse, Jan Maarten de Vries 
-
-We hebben gewerkt aan onze styleguide.
-
-
-# Style Guide
-
-## GitHub
-### Repository  
- 
-In je repository heb je op je eerste pagina maximaal vier bestanden: `README.md`, `DESIGN.md`, `PROCESS.md` en een bestand voor het verslag van de daily standups. De overige bestanden zijn onderverdeeld in verschillende mappen. 
-
-In de map `doc` staan alle foto’s, schetsen en screenshots die je hebt gemaakt. Daarnaast heb je nog een map `project` (of vernoemd naar je eigen project), waarin al je code staat. Je HTML-bestanden staan in deze hoofdmap. Voor CSS en Javascript-bestanden maak je twee aparte subfolders nan `css` en `Javascript`.
-
-### Process  
-In je bestand `PROCESS.md` beschrijf je elke dag kort wat je die dag gedaan hebt, eventueel met screenshots of foto’s erbij. Je begint je beschrijving met een header zoals dit: 
-
-```
-# day 2
-```
-
-## Code
-
-### Headers
-Begin elke file met een header met:
-
-<ul>
-<li>Titel van file</li>
-<li>Beschrijving van functie</li>
-<li>Naam auteur</li>
-<li>Studentennummer</li>
-</ul>
-
-### HTML
-
-Je begint je document altijd met `<!DOCTYPE html>` gevolgd door een `<head>`. In je `<head>` zet je al de verschillende libraries en andere bestanden die je nodig hebt voor je pagina. Na je titel zet je een link naar CSS-bestanden, gevolgd door Javascript-libraries en je eigen Javascript bestanden (als je er meerdere hebt).  
-
-Voorbeeld:
-
-```
-<!DOCTYPE html>
-<head>
-  <meta charset="utf-8">
-  <title>Example title</title>
-  <link rel="stylesheet" type="text/css" href="css/styles.css"/>
-  <script></script>
-</head>
-```
-
-Je ‘main’-JavaScript bestand zet je vervolgens onderaan je body. 
-#### Afbeeldingen
-Voeg bij het gebruiken van afbeeldingen altijd een “alt” attribuut toe. Dit is belangrijk wanneer de afbeelding om een bepaalde reden niet kan worden geladen. Voeg ook een “style” attribuut toe waarin de afmeting van de afbeelding wordt bepaald. Hierdoor wordt er als het ware al ruimte gereserveerd door de afbeelding tijdens het laden van de pagina.
-Voorbeeld:
-```
-<img src=”html15.jpg” alt=”HTML5” style=”width:128px;height:128px”>
-```
-
-### JavaScript
-#### Namen van variabelen
-Gebruik camelCase voor namen van variabelen
-
-#### Spaties rondom operatoren
-Plaats spaties om operatoren ( = + - * / ), en na komma’s
-
-```
-var x = y * z;
-```
-
-#### Indentatie
-Gebruik altijd 4 spaties voor de indentatie van een stuk code
-
-``` 
-function kwadraat(getal) {
-	return getal * getal;
-}
-```
-
-#### Statement Rules
-Eindig een simpele statement met een puntkomma
-
-```
-var auto = [“Volvo”, “Saab”, “Fiat”];
-
-var person = {
-	firstName: “John”,
-	lastName: “Doe”
-};
-```
-Regels voor complexe statements:
-* Plaats { aan het einde van de eerste regel
-* Gebruik een spatie voor {
-* Plaats } op een nieuwe regel, zonder een spatie ervoor
-* Eindig een complexe statement niet met een ;
-
-```
-function kwadraat(getal) {
-	return getal * getal;
-}
-```
-
-#### Loops
-```
-for (i = 0; i < 5; i++) {
-	x += i;
-}
-```
-
-#### Conditionals
-if (time < 20) {
-	greeting = “Good day”;
-} else {
-	greeting = “Good evening”;
-}
-
-Gebruik bij vergelijkingen niet `x == true` of `x == false`. In plaats daarvan moet je `(x)` of `(!x)` gebruiken. 
-
-Wanneer je checkt of een object bestaat, vergelijk dit dan met `null`. Cijfers vergelijk je met `0` en strings met `””`. 
-
-Bij een simpele if-else statement zoals dit: 
-
-```
-if (val) {
-    return foo();
-}
-else {
-    return bar();
-}
-```
-
-Kun je ook de conditional operator `?` gebruiken. Hiermee vermijd je dat je code onnodig lang wordt. Dan wordt dezelfde statement dit: 
-
-```
-return val ? foo() : bar();
-```
-
-
-
-#### Regels voor objecten
-* Plaats { op de zelfde regels als de naam van het object
-* Gebruik een : en een spatie tussen elke eigenschap en zijn waarde
-* Gebruik quotes rondom strings, niet rondom numerieke waardes
-* Voeg geen komma toe na het laatste eigenschap-waarde paar
-* Plaats } op een nieuwe regel, zonder spatie ervoor
-* Eindig een object met een puntkomma
-
-```
-var person = {
-	firstName: “John”,
-	lastName: “Doe”,
-	age: 50
-};
-```
-
-#### Lengte van een regel < 80
-Als de statement niet op 1 regel past, is de beste plaats om een enter te plaatsen na een operator of een komma
-
-```
-document.getElementById(“demo”).innerHTML =
-	“Hello Dolly.”;
-```
-
-#### Comments
-Elke comment wordt voorafgegaan door een witregel, vervolgens hoort er een spatie tussen het comment symbool en de comment tekst. Deze tekst begint altijd met een hoofdletter en eindigt altijd met een punt. Single-line comments worden gebruikt voor de regel die eronder staat, multi-line comments worden alleen gebruikt voor de headers van files of functies. 
-
-```
-// This is a comment
-
-// Even long comments that span
-// multiple lines use the single
-// line comment form.
-
-```
-
-### CSS
-Zet declaraties op alfabetische volgorde om consistent te blijven.
-Gebruik een spatie achter een dubbele punt.
-Voorbeeld:
-```
-background: blue;
-border: ipx solid;
-text-align: center;
-text-indent: 2em;
-```
-
-Gebruik enkele aanhalingstekens in plaats van dubbele.
-## Bronnen: 
-
-- [MDN Coding Style](https://developer.mozilla.org/en-US/docs/JavaScript_Tips)
-- [Google JavaScript Style Guide](https://google.github.io/styleguide/javascriptguide.xml)
-- [JavaScript Style Conventions](http://www.w3schools.com/js/js_conventions.asp)
-- [Repository Setup Minor Programmeren](https://projectf.mprog.nl/reference/repository-setup)
-
-
-
+My project is composed of various files. For the four different visualizations, described above, I made different files, i.e. worldmap.js, barchart.js, scatterplot.js and table.js containing the functions drawing these visualizations. The functions which are used by more than one visualizations, are gathered in one file, helper.js. At first, everything was gathered in one single javascript file and I had a lot of duplicate code, leading to very unorganized code and a 4 out of 10 when checking my code on Better Code Hub. After the separation of files and making functions for duplicate code, checking my code on Better Code Hub led to a 7 out of 10. I do have all my CSS code in one file, because I thought it was not necessary to create five different CSS files with all 10 lines of code, this would only lead to more chaos in my opinion. All these javascript files and the single CSS file are excecuted by one single html file. In this html file all the buttons, the dropdownmenu and the different containers for the visualisations are created. 

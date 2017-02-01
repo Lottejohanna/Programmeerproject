@@ -13,23 +13,23 @@ function drawTable(data, year, category, variable) {
     { head: '#', cl: 'ranking', html: function(d) { return d.ranking }, countrycode: function(d) {return d.countrycode }},
     { head: 'Country', cl: 'country', html: function(d) { return d.country }, countrycode: function(d) { return d.countrycode }},
     { head: category, cl: 'number', html: function(d) { if (isNaN(d.number)) {
-                                                          return "No Data"; }
+                                                          return 'No Data'; }
                                                         return d.number }, countrycode: function(d) { return d.countrycode }},
     { head: 'GDP', cl: 'GDP', html: function(d) { if (isNaN(d.GDP.toFixed(2))) {
-                                                    return "No Data";
+                                                    return 'No Data';
                                                   } 
                                                   return '\u0024' + d.GDP.toFixed(2) }, countrycode: function(d) { return d.countrycode }},
-    { head: 'Happiness', cl: "Happiness", html: function(d) { if (isNaN(d.Happiness.toFixed(2))) {
-                                                                return "No Data";
+    { head: 'Happiness', cl: 'Happiness', html: function(d) { if (isNaN(d.Happiness.toFixed(2))) {
+                                                                return 'No Data';
                                                               } 
                                                               return d.Happiness.toFixed(2) }, countrycode: function(d) { return d.countrycode }}
   ];
 
   // create table
   var sortAscending = true;
-  var table = d3.select("#container4").append("table")
+  var table = d3.select('#container4').append('table')
 
-  table.attr("id", "myTable")
+  table.attr('id', 'myTable')
     .attr('class', 'table table-hover rem');
 
   // create table header
@@ -65,7 +65,7 @@ function drawTable(data, year, category, variable) {
                 .selectAll('tr')
                 .data(dict).enter()
                 .append('tr')
-                .attr("id", function(d) { return d.countrycode; });
+                .attr('id', function(d) { return d.countrycode; });
                 
 
   rows.selectAll('td')
@@ -83,10 +83,10 @@ function drawTable(data, year, category, variable) {
     .html(function(d) {return d.html })
     .attr('class', function(d) {return d.cl})
     .on('mouseover', function(d) {
-      mouseOver(d, data, "countrycode", 'table', variable, category);
+      mouseOver(d, data, 'countrycode', 'table', variable, category);
     })
     .on('mouseout', function(d) {
-      mouseOut(d, "countrycode");
+      mouseOut(d, 'countrycode');
     });
 }
 
@@ -113,19 +113,19 @@ function valueCompare(a, b) {
 function searchFunction() {
   // Declare variables 
   var input, filter, table, tr, td, i;
-  input = document.getElementById("myInput");
+  input = document.getElementById('myInput');
   filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
+  table = document.getElementById('myTable');
+  tr = table.getElementsByTagName('tr');
 
   // Loop through all table rows, and hide those who don't match the search query
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[1];
+    td = tr[i].getElementsByTagName('td')[1];
     if (td) {
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
+        tr[i].style.display = '';
       } else {
-        tr[i].style.display = "none";
+        tr[i].style.display = 'none';
       }
     } 
   }

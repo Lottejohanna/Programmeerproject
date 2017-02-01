@@ -36,7 +36,7 @@ function drawWorldmap(data, year, category, variable) {
         })
         .on('mouseout', function(d) {
             // change color when mouseout
-            mouseOut(d, "id");
+            mouseOut(d, 'id');
         });
     },
 
@@ -48,7 +48,7 @@ function drawWorldmap(data, year, category, variable) {
   drawLegend(category);
 
   // source of the worldmap
-  sourceVis('#container1', "http://databank.worldbank.org/data", "World Databank"); 
+  sourceVis('#container1', 'http://www.who.int/gho/ncd/risk_factors/overweight/en/', 'World Health Organization'); 
 }
 
 function drawLegend(category) {
