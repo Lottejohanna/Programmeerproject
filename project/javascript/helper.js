@@ -44,27 +44,27 @@ function prepareData(data, year, category, variable, table) {
 
 function buttonColor(element) {
 
-  currValue = element.getAttribute("value");
-  currClass = element.getAttribute("class");
-  currID = '#' + currClass.split(" ")[2]
-  currColor = d3.select(element).style("background-color");
+  currValue = element.getAttribute('value');
+  currClass = element.getAttribute('class');
+  currID = '#' + currClass.split(' ')[2]
+  currColor = d3.select(element).style('background-color');
 
   // do nothing if already selected button in pressed
-  if (( currValue != prevValue || currClass.split(" ")[2] != prevClass ) 
+  if (( currValue != prevValue || currClass.split(' ')[2] != prevClass ) 
         && currColor != 'rgb(189, 189, 189)' ) {
     // switch colors of buttons
-    if ((currValue == 0) && (d3.select(element).style("background-color") == 'rgb(240, 240, 240)')) {
-      d3.select(currID + '0').style("background-color", 'rgb(189, 189, 189)');
-      d3.select(currID + '1').style("background-color", 'rgb(240, 240, 240)');
+    if ((currValue == 0) && (d3.select(element).style('background-color') == 'rgb(240, 240, 240)')) {
+      d3.select(currID + '0').style('background-color', 'rgb(189, 189, 189)');
+      d3.select(currID + '1').style('background-color', 'rgb(240, 240, 240)');
     }
 
     else {
-      d3.select(currID + '1').style("background-color", 'rgb(189, 189, 189)');
-      d3.select(currID + '0').style("background-color", 'rgb(240, 240, 240)');
+      d3.select(currID + '1').style('background-color', 'rgb(189, 189, 189)');
+      d3.select(currID + '0').style('background-color', 'rgb(240, 240, 240)');
     } 
   }
   prevValue = currValue;
-  prevClass = currClass.split(" ")[2];  
+  prevClass = currClass.split(' ')[2];  
 }
 
 function addTooltip(container) {
@@ -72,7 +72,7 @@ function addTooltip(container) {
       .attr('class', 'hidden tooltip rem');
 } 
 
-function mouseOver(d, data, id, type, x, y, variable, category) {
+function mouseOver(d, data, id, type, variable, category) {
   currCode = d[id];
 
   // change color of country in map
@@ -116,14 +116,14 @@ function mouseOver(d, data, id, type, x, y, variable, category) {
     // display tooltip when mouseover
     var mouse = [d3.event.pageX, d3.event.pageY];
     tooltip.classed('hidden', false)
-        .style('left', (mouse[0] - x) + 'px')
-        .style('top', (mouse[1] - y) + 'px')
+        .style('left', (mouse[0] - 800) + 'px')
+        .style('top', (mouse[1] - 650) + 'px')
         .html(function() {
           // tooltip for worldmap
           if (type == 'map') {
             if (data[d[id]]) {
               return '<strong>Country:</strong> <span>' + d.properties.name + '</span> <br/> <strong>' 
-                + category + ":</strong> <span>" + data[d[id]].number + "</span>";
+                + category + ':</strong> <span>' + data[d[id]].number + '</span>';
             }
             return '<strong>Country:</strong> <span>' + d.properties.name + '</span> <br/> <strong>' 
               + category + ':</strong> <span> <i>No Data</i> </span>';
@@ -147,13 +147,13 @@ function mouseOver(d, data, id, type, x, y, variable, category) {
             if (variable == 'GDP') {
               return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
               + variable + ':</strong> <span> \u0024' + d[variable].toFixed(2) + '</span> <br/> <strong>' 
-              + category + ":</strong> <span>" + d.number + "</span>";
+              + category + ':</strong> <span>' + d.number + '</span>';
             }
 
             // tooltip for Happiness
-            return "<strong>Country:</strong> <span>" + d.country + " </span> <br/> <strong>" 
-              + variable + ":</strong> <span>" + d[variable].toFixed(1) + "</span> <br/> <strong>" 
-              + category + ":</strong> <span>" + d.number + "</span>"; 
+            return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
+              + variable + ':</strong> <span>' + d[variable].toFixed(1) + '</span> <br/> <strong>' 
+              + category + ':</strong> <span>' + d.number + '</span>'; 
           }
         })
   }
@@ -170,7 +170,7 @@ function mouseOut(d, table) {
 
   // change color of country in map
   if (prevFill) {
-    d3.select(selectorCountry).style("fill", prevFill)
+    d3.select(selectorCountry).style('fill', prevFill)
                               .style('stroke', prevStroke)
                               .style('stroke-width', prevStrokeWidth)
                               .style('opacity', prevOpacity);
@@ -184,11 +184,11 @@ function mouseOut(d, table) {
 }
 
 function sourceVis(container, source, display) {
-  d3.select(container).select("svg").append("text")
-    .attr("class", "source rem")
-    .attr("text-anchor", "left")
-    .attr("x", margin.right)
-    .attr("y", height + margin.bottom + margin.top/1.05)
+  d3.select(container).select('svg').append('text')
+    .attr('class', 'source rem')
+    .attr('text-anchor', 'left')
+    .attr('x', margin.right)
+    .attr('y', height + margin.bottom + margin.top/1.05)
     .html('<a href="' + source + '"target="_blank">Source: \xA9' + display + '</a>');
 }
 

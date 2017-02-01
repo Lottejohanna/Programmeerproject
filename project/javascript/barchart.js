@@ -96,7 +96,7 @@ function drawBarchart(data, year, variable, category){
       .attr("height", function(d) { return height - y(d[variable]); })
       .attr("id", function(d) {  return d.countrycode })
       .on('mouseover', function(d) {
-        mouseOver(d, data, 'countrycode', 'bar', 240, 700, variable, category);
+        mouseOver(d, data, 'countrycode', 'bar', variable, category);
       })
       .on('mouseout', function(d) {
         mouseOut(d, "countrycode");

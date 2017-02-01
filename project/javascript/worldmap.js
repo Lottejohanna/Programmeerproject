@@ -32,7 +32,7 @@ function drawWorldmap(data, year, category, variable) {
     done: function(datamap, geography) {
       datamap.svg.selectAll('.datamaps-subunit')
         .on('mouseover', function(d) {
-            mouseOver(d, data, 'id', 'map', 240, 600, variable, category);
+            mouseOver(d, data, 'id', 'map', variable, category);
         })
         .on('mouseout', function(d) {
             // change color when mouseout

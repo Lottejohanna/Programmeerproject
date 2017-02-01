@@ -9,8 +9,7 @@ function drawScatterplot (data, year, category, variable) {
 
   prepareData(data, year, category, variable, 'no');
 
-  var tooltip = d3.select('#container3').append('div')
-      .attr('class', 'hidden tooltip');
+  addTooltip('#container3');
 
   // ordinal colorscale
   var colors = d3.scale.category10();
@@ -99,7 +98,7 @@ function drawScatterplot (data, year, category, variable) {
         //     return colors(d.fillKey);
         // })
         .on('mouseover', function(d) {
-          mouseOver(d, data, 'countrycode', 'scatter', 200, 640, variable, category);
+          mouseOver(d, data, 'countrycode', 'scatter', variable, category);
         })
         .on('mouseout', function(d) {
           mouseOut(d, "countrycode");
