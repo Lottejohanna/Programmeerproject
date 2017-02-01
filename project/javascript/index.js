@@ -27,8 +27,8 @@ var years = ['2010', '2014'];
 var variables = ['GDP', 'Happiness'];
 
 // default settings
-var currCategory = "Obesity";
-var currYear = "2014";
+var currCategory = 'Obesity';
+var currYear = '2014';
 var currVariableBar = 'GDP';
 var currVariableScatter = 'Happiness';
 var currVariable = currVariableBar;
@@ -37,8 +37,8 @@ d3.json("data.json", function(error, data) {
   if (error) throw error;
 
   // default button color
-  d3.selectAll('.btn.btn-default').style("background-color", 'rgb(240, 240, 240');
-  d3.selectAll('.btn.btn-default.start').style("background-color", 'rgb(189, 189, 189');
+  d3.selectAll('.btn.btn-default').style('background-color', 'rgb(240, 240, 240');
+  d3.selectAll('.btn.btn-default.start').style('background-color', 'rgb(189, 189, 189');
 
   // default worldmap, barcharts and table
   drawWorldmap(data, currYear, currCategory, currVariable);
@@ -47,16 +47,16 @@ d3.json("data.json", function(error, data) {
   drawScatterplot (data, currYear, currCategory, currVariableScatter);
 
   // draw graphs after chosen year
-  d3.selectAll(".btn.btn-default.map")
-    .on("click", function() {
+  d3.selectAll('.btn.btn-default.map')
+    .on('click', function() {
 
       buttonColor(this);
 
-      d3.select(".datamap").remove()
+      d3.select('.datamap').remove()
       d3.select('.datamaps-legend').remove()
-      d3.selectAll(".rem").remove()
+      d3.selectAll('.rem').remove()
 
-      var indexYears = this.getAttribute("value");
+      var indexYears = this.getAttribute('value');
       currYear = years[indexYears];
 
       drawWorldmap(data, currYear, currCategory, currVariable);
@@ -65,45 +65,44 @@ d3.json("data.json", function(error, data) {
       drawScatterplot (data, currYear, currCategory, currVariableScatter);
     });
 
-  d3.selectAll(".btn.btn-default.bar")
-    .on("click", function() {
+  d3.selectAll('.btn.btn-default.bar')
+    .on('click', function() {
 
       buttonColor(this);
 
-      d3.selectAll(".barchart.rem").remove()
+      d3.selectAll('.barchart.rem').remove()
 
-      var indexBars = this.getAttribute("value");
+      var indexBars = this.getAttribute('value');
       currVariableBar = variables[indexBars];
       currVariable = currVariableBar;
 
       drawBarchart(data ,currYear, currVariable, currCategory);
     });
 
-  d3.selectAll(".btn.btn-default.scatter")
-    .on("click", function() {
+  d3.selectAll('.btn.btn-default.scatter')
+    .on('click', function() {
 
       buttonColor(this);
 
-      d3.selectAll(".scatter.rem").remove();
+      d3.selectAll('.scatter.rem').remove();
 
-      var indexScatter = this.getAttribute("value");
+      var indexScatter = this.getAttribute('value');
       currVariableScatter = variables[indexScatter];
       curVariable = currVariableScatter;
 
       drawScatterplot (data, currYear, currCategory, currVariableScatter);
     });
 
-  d3.selectAll(".m")
-    .on("click", function() {
+  d3.selectAll('.m')
+    .on('click', function() {
+      d3.select('.datamap').remove()
+      d3.select('.datamaps-legend').remove()
+      d3.selectAll('.rem').remove()
 
-      d3.select('.datamap').remove();
-      d3.select('.datamaps-legend').remove();
-      d3.selectAll(".table.rem").remove();
-      d3.selectAll(".scatter.rem").remove()
-
-      currCategory = this.getAttribute("value");
+      currCategory = this.getAttribute('value');
 
       drawWorldmap(data, currYear, currCategory, currVariable);
+      drawBarchart(data, currYear, currVariableBar, currCategory);
       drawTable(data, currYear, currCategory, currVariable);
       drawScatterplot (data, currYear, currCategory, currVariableScatter);
     });  

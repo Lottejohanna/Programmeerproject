@@ -46,24 +46,11 @@ with open('../data/weight.csv', 'rU') as infile:
 
                     for j in range(len(weight_categories)):
 
-
-                        # data[years[i]][weight_categories[j]] = {country[1]: {}}
-                        # print "country"["AFG"]
-
-                        # print data[years[i]][weight_categories[j]], i,j, "hoi" 
-
                         data[years[i]][weight_categories[j]].update({country[1]: { "country": country[2],
                                                                             "countrycode": country[1],
                                                                             "fillKey": category[j],
                                                                             "number": numbers[j]}})
-                            
-                    # data[years[i]][country[1]] = {"country": country[2],
-                    #                     "weight": [{"category": "overweight", "number": numbers[0], 
-                    #                                 "fillKey": overweight},
-                    #                                 {"category": "obesity", "number": numbers[1],
-                    #                                 "fillKey": obesity},
-                    #                                 {"category": "BMI", "number": numbers[2],
-                    #                                 "fillKey": bmi}]}
+
     infile.close()
 
 # Add GDP and population
@@ -104,22 +91,3 @@ outfile = open('../project/data.json', 'w')
 
 json.dump(data, outfile, ensure_ascii=False)
 outfile.close()
-
-
-# def append_countrycode(index):
-#     """
-#     This function connects countries to countrycodes
-
-#     index: index in the row corresponding to the name of the country
-
-#     returns a dictionary where the keys are the countrycodes and the 
-#     values are a new dictionary including the name of the country as value
-#     """
-
-#     new_dict = dict()
-
-#     for country in country_codes:
-#         if row[index] == country[2]:
-#             new_dict[country[1]] = {"country": country[2]}
-
-#     return new_dict

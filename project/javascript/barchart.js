@@ -31,8 +31,6 @@ function drawBarchart(data, year, variable, category){
   // create svg
   var chart = d3.select('#container2').append("svg")
     .attr("class", "barchart rem")
-        // .attr("width", width + margin.left + margin.right)
-        // .attr("height", height + margin.top + margin.bottom)
       .attr("width", "100%")
       .attr("height", 400)
       .append("g")
@@ -98,34 +96,10 @@ function drawBarchart(data, year, variable, category){
       .attr("height", function(d) { return height - y(d[variable]); })
       .attr("id", function(d) {  return d.countrycode })
       .on('mouseover', function(d) {
-
         mouseOver(d, data, 'countrycode', 'bar', 240, 700, variable, category);
-
-        // mouseOver(d, id, type, x, y, variable, category)
-
-        // // display tooltip when mouseover
-        // // var mouse = d3.mouse(this);
-        // var mouse = [d3.event.pageX, d3.event.pageY];
-        // console.log('bar', mouse);
-        // tooltip.classed('hidden', false)
-        //     .attr('style', 'left:' + (mouse[0] - 100) +
-        //             'px; top:' + (mouse[1] - 700) + 'px')
-        //     .html(function() {
-                  
-        //       if (variable == 'GDP') {
-        //         return "<strong>Country:</strong> <span>" + d.country + "</span> <br/> <strong>" 
-        //           + variable + ":</strong> <span> \u0024" + d[variable].toFixed(2) + "</span>";
-        //       }
-        //       return "<strong>Country:</strong> <span>" + d.country + "</span> <br/> <strong>" 
-        //           + variable + ":</strong> <span>" + d[variable].toFixed(1) + "</span>";
-        //     })
       })
       .on('mouseout', function(d) {
-
         mouseOut(d, "countrycode");
-
-        // hide tooltip when mouseout
-        // tooltip.classed('hidden', true);
       });
 
   // source of the barchart

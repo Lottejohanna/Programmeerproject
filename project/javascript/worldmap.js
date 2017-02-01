@@ -32,35 +32,11 @@ function drawWorldmap(data, year, category, variable) {
     done: function(datamap, geography) {
       datamap.svg.selectAll('.datamaps-subunit')
         .on('mouseover', function(d) {
-
-            // change color when mouseover
-            // mouseOver(d, "id");
-
-            mouseOver(d, data, 'id', 'map', 100, 550, variable, category);
-
-            // display tooltip when mouseover
-            // var mouse = d3.mouse(this);
-            // var mouse = [d3.event.pageX, d3.event.pageY];
-            // console.log('map', mouse);
-            // tooltip.classed('hidden', false)
-            //     .attr('style', 'left:' + (mouse[0] - 100) +
-            //             'px; top:' + (mouse[1] - 550) + 'px')
-            //     .html(function() {
-                  
-            //       if (data[d.id]) {
-            //         return "<strong>Country:</strong> <span>" + d.properties.name + "</span> <br/> <strong>" 
-            //           + category + ":</strong> <span>" + data[d.id].number + "</span>";
-            //       }
-            //       return "<strong>Country:</strong> <span>" + d.properties.name + "</span> <br/> <strong>" 
-            //         + category + ":</strong> <span> <i>No Data</i> </span>";
-            //     })
+            mouseOver(d, data, 'id', 'map', 240, 600, variable, category);
         })
         .on('mouseout', function(d) {
             // change color when mouseout
             mouseOut(d, "id");
-
-            // hide tooltip when mouseout
-            // tooltip.classed('hidden', true);
         });
     },
 

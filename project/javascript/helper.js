@@ -77,18 +77,18 @@ function mouseOver(d, data, id, type, x, y, variable, category) {
 
   // change color of country in map
   if (prevFill) {
-    d3.select(selectorCountry).style("fill", prevFill)
+    d3.select(selectorCountry).style('fill', prevFill)
                               .style('opacity', '1')
                               .style('stroke', prevStroke)
                               .style('stroke-width', prevStrokeWidth);
   }
   selectorCountry = '.datamaps-subunit.' + currCode;
   try { 
-    prevFill = d3.selectAll(selectorCountry).style("fill");
-    prevStroke = d3.selectAll(selectorCountry).style("stroke");
-    prevStrokeWidth = d3.selectAll(selectorCountry).style("stroke-width");
-    prevOpacity = d3.selectAll(selectorCountry).style("opacity");
-    d3.selectAll(selectorCountry).style("fill", "#fdae61")
+    prevFill = d3.selectAll(selectorCountry).style('fill');
+    prevStroke = d3.selectAll(selectorCountry).style('stroke');
+    prevStrokeWidth = d3.selectAll(selectorCountry).style('stroke-width');
+    prevOpacity = d3.selectAll(selectorCountry).style('opacity');
+    d3.selectAll(selectorCountry).style('fill', '#fdae61')
                                   .style('opacity', '0.8')
                                   .style('stroke', 'black')
                                   .style('stroke-width', '2');
@@ -122,31 +122,31 @@ function mouseOver(d, data, id, type, x, y, variable, category) {
           // tooltip for worldmap
           if (type == 'map') {
             if (data[d[id]]) {
-              return "<strong>Country:</strong> <span>" + d.properties.name + "</span> <br/> <strong>" 
+              return '<strong>Country:</strong> <span>' + d.properties.name + '</span> <br/> <strong>' 
                 + category + ":</strong> <span>" + data[d[id]].number + "</span>";
             }
-            return "<strong>Country:</strong> <span>" + d.properties.name + "</span> <br/> <strong>" 
-              + category + ":</strong> <span> <i>No Data</i> </span>";
+            return '<strong>Country:</strong> <span>' + d.properties.name + '</span> <br/> <strong>' 
+              + category + ':</strong> <span> <i>No Data</i> </span>';
           }
 
           // tooltip for barchart
           else if (type == 'bar') {
             // tooltip for GDP
             if (variable == 'GDP') {
-              return "<strong>Country:</strong> <span>" + d.country + "</span> <br/> <strong>" 
-                + variable + ":</strong> <span> \u0024" + d[variable].toFixed(2) + "</span>";
+              return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
+                + variable + ':</strong> <span> \u0024' + d[variable].toFixed(2) + '</span>';
             }
             // tooltip for Happiness
-            return "<strong>Country:</strong> <span>" + d.country + "</span> <br/> <strong>" 
-                + variable + ":</strong> <span>" + d[variable].toFixed(1) + "</span>"; 
+            return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
+                + variable + ':</strong> <span>' + d[variable].toFixed(1) + '</span>'; 
           }
 
           // tooltip for scatterplot
           else {
             // tooltip for GDP
             if (variable == 'GDP') {
-              return "<strong>Country:</strong> <span>" + d.country + " </span> <br/> <strong>" 
-              + variable + ":</strong> <span> \u0024" + d[variable].toFixed(2) + "</span> <br/> <strong>" 
+              return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
+              + variable + ':</strong> <span> \u0024' + d[variable].toFixed(2) + '</span> <br/> <strong>' 
               + category + ":</strong> <span>" + d.number + "</span>";
             }
 

@@ -26,7 +26,6 @@ function drawScatterplot (data, year, category, variable) {
     .domain(d3.extent(dict, function(d) {
       return d.number;
     }))
-    // .range([0, width - margin.left - margin.right]);
     .range([0, width]);
 
   var y = d3.scale.linear()
@@ -100,34 +99,11 @@ function drawScatterplot (data, year, category, variable) {
         //     return colors(d.fillKey);
         // })
         .on('mouseover', function(d) {
-
           mouseOver(d, data, 'countrycode', 'scatter', 200, 640, variable, category);
-
-          // // display tooltip when mouseover
-          // var mouse = [d3.event.pageX, d3.event.pageY];
-          // console.log('scatter', mouse);
-          // tooltip.classed('hidden', false)
-          //     .style('left', (mouse[0] - 540) + 'px')
-          //     .style('top', (mouse[1]) - 640 + 'px')
-          //     .html(function() {
-          //         if (variable == 'GDP') {
-          //           return "<strong>Country:</strong> <span>" + d.country + " </span> <br/> <strong>" 
-          //           + variable + ":</strong> <span> \u0024" + d[variable].toFixed(2) + "</span> <br/> <strong>" 
-          //           + category + ":</strong> <span>" + d.number + "</span>";
-          //         }
-
-          //       return "<strong>Country:</strong> <span>" + d.country + " </span> <br/> <strong>" 
-          //         + variable + ":</strong> <span>" + d[variable].toFixed(1) + "</span> <br/> <strong>" 
-          //         + category + ":</strong> <span>" + d.number + "</span>";            
-          //     })
-      })
-      .on('mouseout', function(d) {
-
-        mouseOut(d, "countrycode");
-
-        // // hide tooltip when mouseout
-        // tooltip.classed('hidden', true);
-      });
+        })
+        .on('mouseout', function(d) {
+          mouseOut(d, "countrycode");
+        });
 
   // countryGroup.append("text")
   //     .style("text-anchor", "middle")

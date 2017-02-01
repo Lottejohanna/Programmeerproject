@@ -337,4 +337,4 @@ To Do:
 Wed Feb 1
 Help, year buttons don't work anymore. Fixed! I changed all the variable names, but forgot this one. 
 
-
+Wrote a function for my tooltip, however is you change the category it is still not working. Put code through bettercodehub. Before my improvement of seperate functions and files, I received a 4. After I received a 6. 
