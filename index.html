@@ -9,6 +9,10 @@ Number: 10654976
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- Bootstrap stylesheet -->
+        <link rel="stylesheet" href="project/javascript/libraries/bootstrap.min.css"/>
+        <!-- Stylesheet Project -->
+        <link rel="stylesheet" type="text/css" href="project/css/project.css"/>
         <!-- D3 -->
         <script type="text/javascript" src="project/javascript/libraries/d3.min.js"></script>
         <!-- Topojson -->
@@ -17,18 +21,14 @@ Number: 10654976
         <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
         <!-- Bootstrap javascript -->
         <script type="text/javascript" src="project/javascript/libraries/bootstrap.min.js"></script>
-        <!-- Bootstrap stylesheet -->
-        <link rel="stylesheet" href="project/javascript/libraries/bootstrap.min.css"/>
         <!-- Datamaps javascript -->
-        <script src="project/javascript/datamaps.world.min.js"></script>
+        <script type="text/javascript" src="project/javascript/libraries/datamaps.world.min.js"></script>
         <!-- Javascript files project -->
         <script type="text/javascript" src="project/javascript/helper.js"></script>
         <script type="text/javascript" src="project/javascript/worldmap.js"></script>
         <script type="text/javascript" src="project/javascript/barchart.js"></script>
         <script type="text/javascript" src="project/javascript/scatterplot.js"></script>
         <script type="text/javascript" src="project/javascript/table.js"></script>
-        <!-- Stylesheet Project -->
-        <link rel="stylesheet" type="text/css" href="project/css/project.css"/>
     </head>
 
     <body>
@@ -55,7 +55,7 @@ Number: 10654976
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                             Category <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu" role="menu">
+                        <ul class="dropdown-menu" role="menu" id="dropdown">
                             <li><a class="m" value="Obesity" selected='True' href="#">Obesity</a></li>
                             <li><a class="m" value="Overweight" href="#">Overweight</a></li>
                             <li><a class="m" value="BMI" href="#">BMI</a></li>
@@ -123,7 +123,7 @@ Number: 10654976
             </div>
         </div> -->
 
-        <!-- Javascriptfile index.js -->
+        <!-- Main Javascript-->
         <script type="text/javascript" src="project/javascript/index.js"></script>
     </body>
 

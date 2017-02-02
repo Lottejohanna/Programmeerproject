@@ -1,29 +1,42 @@
-# Project proposal
+# Programmeerproject - The fat, the poor and the unhappy
 
-## Concept
+The prosperity of a country, commonly measured in terms of its annual per capita Gross Domestic Product (GDP), might have different relationships with the body weight and happiness of a population. In this visualization I want to show if there are any trends detectable examining these variables. I want to examine if there is a relationship between a healthy body weight and a certain level of income and happiness. 
 
-The prosperity of a country, commonly measured in terms of its annual per capita Gross Domestic Product (GDP), might have different relationships with the body weight and happiness of a population. In this visualization I want to show if there are any trends detectable examining these variables. I want to examine if there is a level of GDP which provides for optimal happiness and a healthy level of BMI. 
+![](doc/report1.png)
 
 ## Visualizations
 
-### Visualizations 1 (MVP)
-A world map where the obesity rate of countries is shown. If you hover over a specific country the information will be displayed in a pop-up (country, population, GDP, happiness, BMI/overweight/obesity). For this map there is a drowdown menu where you can choose between IBM/overweight/obesity and there will be two checkboxes where you can choose between 2010 and 2014. If you click on a country the bars from that country will light up in the two barcharts and the table. The countrycode will be used as the key which is able to link all the visualizations. The default setting will display the BMI per country in 2014.
+### Visualization 1: The Worldmap
+The worldmap shows the BMI or Obesity or Overweight percentage per country. If you hover over a specific country the information will be displayed in a pop-up (country, BMI/overweight/obesity). For this map there is a drowdown menu where you can choose between IBM/overweight/obesity and there will be two checkboxes where you can choose between 2010 and 2014. This worldmap is linked with the barchart, scatterplot and table.
 
-### Visualization 2 (MVP)
-A bar chart will display the GDP ranking of that country. The x-axis will be the countries and the y-axis will be the GDP per capita in US dollars. The countries will be sorted from lowest to highest GDP. This barchart will be linked with the worldmap, happines bar chart and the table.
+### Visualization 2: The Barchart
+The bar chart will display either the GDP per capita per country or the level of Happiness per country. The x-axis will be the countries and the y-axis will be either the GDP per capita in US dollars or the Happiness rate per country. The countries will be sorted from lowest to highest GDP. This barchart is linked with the worldmap, scatterplot and the table.
 
-### Visualization 3 (MVP)
-A bar chart displaying the happiness of a country. The x-axis will display the countries and the y-axis the happiness rate on a scale from 1 to 10. The countries will be sorted from lowest to highest rate. This barchart is linked to all other visualizations.  
+### Visualization 3: The Scatterplot
+The scatterplot either visualizes data about the level of happiness per country or data about the GDP per Capita, both versus the selected weight category by using the dropdownmenu on the top left corner of the worldmap. The scatterplot is linked to all other visualizations.  
 
-### Visualization 4 (MVP)
-A table displaying the country name, BMI/overweight/obesity country ranking, GDP, happiness rate and the BMI/overweight/obesity. It will be possible to look for a specific country using a look up function and to sort the list by all these different variables. This table will also be linked to the worldmap and the barcharts. By default this will display the top 5 countries.
+### Interactive Component: The Table
+A table displaying the BMI/overweight/obesity country ranking, the name of the country, the BMI/overweight/obesity number, GDP and the happiness rate. It is possible to look for a specific country using a look up function and to sort the list by all these different variables. This table is also linked to all other visualizations.
 
-![](doc/design.png)
+## Data Sources
+* [BMI, Overweight and Obesity](http://www.who.int/gho/ncd/risk_factors/overweight/en/)
+* [GDP per capita](http://databank.worldbank.org/data)
+* [Happiness rate](https://en.wikipedia.org/wiki/World_Happiness_Report)
 
-## Data
+## Code Sources
+* [barchart](https://bost.ocks.org/mike/bar/)
+* [scatterplot](https://jsfiddle.net/eamonnmag/Q567s/)
+* [ranking in table](http://stackoverflow.com/questions/27479750/getting-top-10-values-in-a-json-file)
+* [searching in table](http://www.w3schools.com/howto/howto_js_filter_table.asp)
+* [sorting in table](http://bl.ocks.org/biovisualize/1226718)
+* [table](http://bl.ocks.org/gka/17ee676dc59aa752b4e6)
+* [worldmap](https://github.com/markmarkoh/datamaps) 
 
-As datasets I will use data from the worldbank for the GDP. I will use obesity data from the World Health Orginization. The happiness is available at Wikipedia. 
+## Libraries
+* Bootstrap.min.js - Copyright 2011-2014 Twitter, Inc.
+* Bootstrap.min.css - Copyright 2011-2014 Twitter, Inc.
+* d3.min.js - Copyright 2015 Mike Bostock
+* datamaps.world.min.js - MIT License Mark DiMarco
+* topojson.min.js - Copyright (c) 2012-2016, Michael Bostock All rights reserved
 
-## Libraries and technical problems
-
-I will use the worldmap from datamaps.github.com. I will probably encounter a lot of technical problems. We have never tried to implement so many different visualizations on one page. They all have to be linked and updated once a user changes something.  
+Copyright (c) 2017 Lotte Slim

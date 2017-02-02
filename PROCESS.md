@@ -316,13 +316,8 @@ Checked code on better code hub
 Thu Feb 2
 
 * Report Report Report Report Report Report Report Report Report 
-
 * tooltip function didn't work, changed it back to old version. No time anymore to fix this bug properly
-
 * Published application online
-
 * Commented all my code
-
 * Changed the readme
-
 * Cleaned my CSS file

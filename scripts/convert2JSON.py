@@ -50,7 +50,6 @@ with open('../data/weight.csv', 'rU') as infile:
                                                                             "countrycode": country[1],
                                                                             "fillKey": category[j],
                                                                             "number": numbers[j]}})
-
     infile.close()
 
 # Add GDP and population
