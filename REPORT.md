@@ -1,12 +1,3 @@
-Create the final report
-Create a report (REPORT.md), based on your design document, containing important decisions that you’ve made, e.g. where you changed your mind during the past weeks. This is how you show the reviewer that you actually understand what you have done.
-
-** Start with a short description of your application (like in the README.md, but very short, including a single screen shot).**
-
-** Clearly describe the technical design: how is the functionality implemented in your code? This should be like your DESIGN.md but updated to reflect the final application. First, give a high level overview, which helps us navigate and understand the total of your code (which components are there?). Second, go into detail, and describe the modules/classes and how they relate.**
-
-** Clearly describe challenges that your have met during development. Document all important changes that your have made with regard to your design document (from the PROCESS.md). Here, we can see how much you have learned in the past month. **
-
 # Final Report
 
 ## Description
@@ -87,4 +78,15 @@ Regarding my Design Document, the original plan was to make a worldmap displayin
 However, I changed my original plan concerning the two barcharts. The plan for the two separate barcharts I combined in one barchart, where a button makes the user able to switch between the two different datasets. Instead of the second barchart, a scatterplot is displayed where the Happiness or GDP versus the chosen weight category is displayed, again the user can choose between Happiness or GDP by clicking on one of the two buttons on the top left corner of the graph. It is noteworthy to remark how easy it was to transform my barchart to a scatterplot because of the intensive programming of the past five months.  
 
 ## Ideal World
-** Defend your decisions by writing an argument of a most a single paragraph. Why was it good to do it different than you thought before? Are there trade-offs for your current solution? In an ideal world, given much more time, would you choose another solution? **
+The applications meets all the functional requirements and more. The change from the intended two barcharts to one barchart and one scatterplot was a good decision because it made the application more informative and diversive. For this application I only examined the data for 2 years, i.e. 2010 and 2014, because the first time I checked the site of the World Health Organization this was the only data available. However, a week later they published the data from 1975 up to 2014, which is even more informative than only displaying two years. I started expanding the datasets but discovered after two days of work, that I simply would not have enough time to expand all the data and adjust all the functions for the visualizations to obtain a flawless application before the deadline. So in an ideal world I would expand the dataset and show the data for more than two years on my webpage. Also, with more time I would add some small features as transitions between graphs, fixed headers instead of scrollable ones, learn how to use the update function instead of remove, make the user able to also sort from highest to lowest instead of only from lowest to highest and roll to a specific row of the table once the user clicks on a country, bar or dot in the scatterplot. Nonetheless, even thought a lot could be improved upon this application, I have learned a great deal in the past five months and am satisfied with the final product. 
+
+### References
+[barchart]: https://bost.ocks.org/mike/bar/
+[scatterplot]: https://jsfiddle.net/eamonnmag/Q567s/
+[ranking in table]: http://stackoverflow.com/questions/27479750/getting-top-10-values-in-a-json-file
+[searching in table]: http://www.w3schools.com/howto/howto_js_filter_table.asp
+[sorting in table]: http://bl.ocks.org/biovisualize/1226718
+[table]: http://bl.ocks.org/gka/17ee676dc59aa752b4e6
+[worldmap]: https://github.com/markmarkoh/datamaps
+
+

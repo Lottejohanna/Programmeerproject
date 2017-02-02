@@ -178,7 +178,6 @@ Thu January 19
 
 * 13-17h obligatory student assistent training
 
-
 To do's today
 * sort table on click, also append ranking
 * connect country to barchart
@@ -236,22 +235,9 @@ Wed Jan 25
 
 * Daily standup: tekst erbij om het verhaal te vertellen
 
-* 25 min: table sort
-* 25 min: table sort
-* 25 min: table sort - problems with no data points
-* 25 min: try to make own popup template using datamaps 
-
-
 * Added new sort function, old function wasn't working properly. Check if value is a number, sort these, else change letter to uppercase in order to compare all letters in the string. Problem with the no data points. In some weird way, typeof(IsNaN) was 'number', so couldn't check if no data was a string, change this to the check if isNaN(someValue), changed that value to infinity in order to place the no data points in the table on the bottom when that specific column is sorted. However, in this way the alphabetical sort didn't work anymore, so I changed the structure of my function to a try/catch, and now it works!
 Not working table sort: http://bl.ocks.org/AMDS/4a61497182b8fcb05906
 Working sort: http://bl.ocks.org/biovisualize/1226718
-
-* 25 min: fix table sort, popup template datamaps
-* 25 min: popup template datamaps
-* 25 min: popup template datamaps
-* 25 min: popup template datamaps
-
-* 25 min: popup template datamaps
 
 * Fixed popup on hover on map, finally! Source: http://bl.ocks.org/lhoworko/7753a11efc189a936371. Only problem are the countries where the id in datamaps is '#-99', have to fix that tomorrow.
 
@@ -262,16 +248,9 @@ Thu Jan 26
 * Wed: Adjust JSON file for 2008-2014 for overweight, obesitas, BMI, GDP and happiness
 * Thur: Timeslider
 
-
-
 * Changed the country ID's of -99 in my worldmap.min.js file from -99 tot A-99. No errors anymore, now I only have to add that the color of the country changes back once hovered over. Only problem is somaliland, gonna ask the tutors. Fixed the problem by giving all the countries their own ID. (Kosovo, Somaliland, Nothern Cyprus)
 
 * Popup when hovering over barchart has the same problem as the worldmap. Cannot use the function d3-tip, so I have to create my own tooltip just as I did with the worldmap.
-
-* 25 min: fix country ID's -99
-* 25 min: hover bar chart
-* 25 min: hover bar chart
-* 25 min: onclick -> go to table - FAILED
 
 Daily standup: 
 * Change ID for countries in worldmap.min.js: countries u don't use ~ AAA, other countries check country code.
@@ -279,10 +258,6 @@ Daily standup:
 
 Change of plans. Currently I have 2 barcharts, but I'm gonna change this to 1 barchart and 1 scatterplot.
 Source: https://jsfiddle.net/eamonnmag/Q567s/
-
-* 25 min: scatterplot
-* 25 min: scatterplot
-* 25 min: scatterplot
 
 I fixed the scatterplot, however the interactivity is not working on this plot yet.
 
@@ -296,21 +271,15 @@ TO DO:
 * Fix tableheaders, always display them even when using the scrollbar
 * Change colors scatterplot
 * On click, scroll to row in table
-* Change the colors of the buttons ~ http://stackoverflow.com/questions/10939082/d3-javascript-alternate-colors-on-click
+* Change the colors of the buttons ~ http://stackoverflow.com/questions/10939082/d3-javascript-alternate-colors-on-click - didn't use this eventually
 
 * Change colors of the buttons - Didn't work, couldn't fix that the color stays the same if you push on a button of an other visualization than the previous one.
 
 Mon Jan 30
-
-25 min: button
-25 min: hover scatter 	
-25 min: button
-25 min: button - didn't work
-
-25 min: questions Tim: popup on scatterplot ~ problem is the mouse(this), takes mousecoordinates of dots
+questions Tim: popup on scatterplot ~ problem is the mouse(this), takes mousecoordinates of dots
 						no data points scatter: remove them from dictionary
 						Button: value 0 or 1
-25 min: fixed the popup on hover of the scatterplot, and the no data points.
+fixed the popup on hover of the scatterplot, and the no data points.
 
 No data points in scatter: removed countries with no information about the GDP/Happiness from the dictionary used for the scatterplot. Otherwise you get very weird points in the top-left corner of the scatterplot. 
 
@@ -349,3 +318,11 @@ Thu Feb 2
 * Report Report Report Report Report Report Report Report Report 
 
 * tooltip function didn't work, changed it back to old version. No time anymore to fix this bug properly
+
+* Published application online
+
+* Commented all my code
+
+* Changed the readme
+
+* Cleaned my CSS file
