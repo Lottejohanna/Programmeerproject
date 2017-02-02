@@ -112,19 +112,6 @@ function drawBarchart(data, year, variable, category){
               // tooltip for Happiness
               return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
                 + variable + ':</strong> <span>' + d[variable].toFixed(1) + '</span>';
-              
-              // if (d.value != 0) {
-              //   if (variable == 'GDP') {
-              //     return "<strong>Country:</strong> <span>" + d.country + "</span> <br/> <strong>" 
-              //       + variable + ":</strong> <span> \u0024" + d.value.toFixed(2) + "</span>";
-              //   }
-              //   return "<strong>Country:</strong> <span>" + d.country + "</span> <br/> <strong>" 
-              //       + variable + ":</strong> <span>" + d.value.toFixed(1) + "</span>";
-              // }
-
-              // return "<strong>Country:</strong> <span>" + d.country + " </span> <br/> <strong>" 
-              //   + variable + ":</strong> <span> <i>No Data</i> </span>";
-              
             })
       })
       .on('mouseout', function(d) {

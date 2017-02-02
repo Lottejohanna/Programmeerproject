@@ -110,57 +110,6 @@ function mouseOver(d, id, type) {
   // highlight row in table
   var row = d3.select('#myTable').select('#' + currCode);
   row.style('background-color', '#fdae61');
-  // row.scrollIntoView(true);
-
-  // // show tooltip if not table
-  // if (type != 'table') {
-
-  //   // display tooltip when mouseover
-  //   var mouse = [d3.event.pageX, d3.event.pageY];
-  //   tooltip = d3.select('#tooltip' + type);
-
-  //   tooltip.classed('hidden', false)
-  //       .style('left', (mouse[0] - 250) + 'px')
-  //       .style('top', (mouse[1] - 100) + 'px')
-  //       .html(function() {
-  //         // tooltip for worldmap
-  //         if (type == 'map') {
-  //           if (data[d[id]]) {
-  //             return '<strong>Country:</strong> <span>' + d.properties.name + '</span> <br/> <strong>' 
-  //               + category + ':</strong> <span>' + data[d[id]].number + '</span>';
-  //           }
-  //           return '<strong>Country:</strong> <span>' + d.properties.name + '</span> <br/> <strong>' 
-  //             + category + ':</strong> <span> <i>No Data</i> </span>';
-  //         }
-
-  //         // tooltip for barchart
-  //         else if (type == 'bar') {
-  //           // tooltip for GDP
-  //           if (variable == 'GDP') {
-  //             return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
-  //               + variable + ':</strong> <span> \u0024' + d[variable].toFixed(2) + '</span>';
-  //           }
-  //           // tooltip for Happiness
-  //           return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
-  //               + variable + ':</strong> <span>' + d[variable].toFixed(1) + '</span>'; 
-  //         }
-
-  //         // tooltip for scatterplot
-  //         else {
-  //           // tooltip for GDP
-  //           if (variable == 'GDP') {
-  //             return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
-  //             + variable + ':</strong> <span> \u0024' + d[variable].toFixed(2) + '</span> <br/> <strong>' 
-  //             + category + ':</strong> <span>' + d.number + '</span>';
-  //           }
-
-  //           // tooltip for Happiness
-  //           return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
-  //             + variable + ':</strong> <span>' + d[variable].toFixed(1) + '</span> <br/> <strong>' 
-  //             + category + ':</strong> <span>' + d.number + '</span>'; 
-  //         }
-  //       })
-  // }
 }
 
 function mouseOut(d, table) {
