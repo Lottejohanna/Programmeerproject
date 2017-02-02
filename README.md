@@ -1,6 +1,6 @@
 # Programmeerproject - The fat, the poor and the unhappy
 
-The prosperity of a country, commonly measured in terms of its annual per capita Gross Domestic Product (GDP), might have different relationships with the body weight and happiness of a population. In this visualization I want to show if there are any trends detectable examining these variables. I want to examine if there is a relationship between a healthy body weight and a certain level of income and happiness. 
+The body weight of the population in a country might have different relationships with prosperity of a country, commonly measured in terms of its annual per capita Gross Domestic Product (GDP), and happiness of a population. In these visualizations the relationship between the body weight of a population and the level of income and happiness is examined. 
 
 ![](doc/report1.png)
 

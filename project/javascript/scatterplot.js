@@ -118,7 +118,7 @@ function drawScatterplot (data, year, category, variable) {
             var mouse = [d3.event.pageX, d3.event.pageY];
             tooltip.classed('hidden', false)
                 .attr('style', 'left:' + (mouse[0] - 920) +
-                        'px; top:' + (mouse[1] - 650) + 'px')
+                        'px; top:' + (mouse[1] - 850) + 'px')
                 .html(function() {
                     // tooltip for GDP
                     if (variable == 'GDP') {

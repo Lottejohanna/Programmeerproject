@@ -7,7 +7,6 @@ Number: 10654976
 */
 
 /*HEADER*/
-/* Remove the jumbotron's default bottom margin */ 
 .jumbotron {
   	margin-bottom: 0;
   	margin: 0 auto;
@@ -26,7 +25,6 @@ Number: 10654976
 }
 
 /*FOOTER*/
-/* Add a grey background color and some padding to the footer */
 footer {
   	background-color: #f2f2f2;
   	padding: 25px;
