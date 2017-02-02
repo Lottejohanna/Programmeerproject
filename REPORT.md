@@ -85,12 +85,12 @@ However, I changed my original plan concerning the two barcharts. The plan for t
 The applications meets all the functional requirements and more. The change from the intended two barcharts to one barchart and one scatterplot was a good decision because it made the application more informative and diversive. For this application I only examined the data for 2 years, i.e. 2010 and 2014, because the first time I checked the site of the World Health Organization this was the only data available. However, a week later they published the data from 1975 up to 2014, which is even more informative than only displaying two years. I started expanding the datasets but discovered after two days of work, that I simply would not have enough time to expand all the data and adjust all the functions for the visualizations to obtain a flawless application before the deadline. So in an ideal world I would expand the dataset and show the data for more than two years on my webpage. Also, with more time I would add some small features as transitions between graphs, fixed headers instead of scrollable ones, learn how to use the update function instead of remove, make the user able to also sort from highest to lowest instead of only from lowest to highest and roll to a specific row of the table once the user clicks on a country, bar or dot in the scatterplot. Nonetheless, even thought a lot could be improved upon this application, I have learned a great deal in the past five months and am satisfied with the final product. 
 
 ### References
-[barchart](https://bost.ocks.org/mike/bar/)
-[scatterplot](https://jsfiddle.net/eamonnmag/Q567s/)
-[ranking in table](http://stackoverflow.com/questions/27479750/getting-top-10-values-in-a-json-file)
-[searching in table](http://www.w3schools.com/howto/howto_js_filter_table.asp)
-[sorting in table](http://bl.ocks.org/biovisualize/1226718)
-[table](http://bl.ocks.org/gka/17ee676dc59aa752b4e6)
-[worldmap](https://github.com/markmarkoh/datamaps)
+* [barchart](https://bost.ocks.org/mike/bar/)
+* [scatterplot](https://jsfiddle.net/eamonnmag/Q567s/)
+* [ranking in table](http://stackoverflow.com/questions/27479750/getting-top-10-values-in-a-json-file)
+* [searching in table](http://www.w3schools.com/howto/howto_js_filter_table.asp)
+* [sorting in table](http://bl.ocks.org/biovisualize/1226718)
+* [table](http://bl.ocks.org/gka/17ee676dc59aa752b4e6)
+* [worldmap](https://github.com/markmarkoh/datamaps)
 
 
