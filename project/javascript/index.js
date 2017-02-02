@@ -70,13 +70,16 @@ d3.json("data.json", function(error, data) {
 
       buttonColor(this);
 
-      d3.selectAll('.barchart.rem').remove()
+      d3.selectAll('.barchart.rem').remove();
+      d3.selectAll('.scatter.rem').remove();
+      d3.selectAll('#tooltipbar').remove();
 
       var indexBars = this.getAttribute('value');
       currVariableBar = variables[indexBars];
       currVariable = currVariableBar;
 
-      drawBarchart(data ,currYear, currVariable, currCategory);
+      drawBarchart(data , currYear, currVariableBar, currCategory);
+      drawScatterplot(data, currYear, currCategory, currVariableScatter);
     });
 
   d3.selectAll('.btn.btn-default.scatter')
@@ -84,13 +87,16 @@ d3.json("data.json", function(error, data) {
 
       buttonColor(this);
 
+      d3.selectAll('.barchart.rem').remove();
       d3.selectAll('.scatter.rem').remove();
+      d3.selectAll('#tooltipscatter').remove();
 
       var indexScatter = this.getAttribute('value');
       currVariableScatter = variables[indexScatter];
       curVariable = currVariableScatter;
 
-      drawScatterplot (data, currYear, currCategory, currVariableScatter);
+      drawBarchart(data , currYear, currVariableBar, currCategory);
+      drawScatterplot(data, currYear, currCategory, currVariableScatter);
     });
 
   d3.selectAll('.m')

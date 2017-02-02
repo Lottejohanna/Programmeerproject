@@ -125,7 +125,7 @@ TO
 
 Tue January 17
 
-* difficulties connecting button and drowdown choices
+* difficulties connecting button and dropdown choices
 
 * student helped me: make global variable 'current_year' and 'current_category' and update these when clicked on button or dropdown, still not working
 
@@ -337,4 +337,13 @@ To Do:
 Wed Feb 1
 Help, year buttons don't work anymore. Fixed! I changed all the variable names, but forgot this one. 
 
-Wrote a function for my tooltip, however is you change the category it is still not working. Put code through bettercodehub. Before my improvement of seperate functions and files, I received a 4. After I received a 6. 
+Wrote a function for my tooltip, however is you change the category it is still not working. Put code through bettercodehub. Before my improvement of seperate functions and files, I received a 4. After I received a 6. After another cleaning round I got a 7.
+
+Tooltip still needs to be fixed when clicked on button in barchart.
+
+Started with report
+Checked code on better code hub
+
+Thu Feb 2
+
+* Report Report Report Report Report Report Report Report Report 

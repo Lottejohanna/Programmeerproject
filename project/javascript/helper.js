@@ -67,12 +67,14 @@ function buttonColor(element) {
   prevClass = currClass.split(' ')[2];  
 }
 
-function addTooltip(container) {
+function addTooltip(container, type) {
   tooltip = d3.select(container).append('div')
-      .attr('class', 'hidden tooltip rem');
+      .attr('class', 'hidden tooltip rem')
+      .attr('id', 'tooltip' + type);
 } 
 
-function mouseOver(d, data, id, type, variable, category) {
+// function mouseOver(d, data, id, type, variable, category) {
+function mouseOver(d, id, type) {
   currCode = d[id];
 
   // change color of country in map
@@ -110,53 +112,55 @@ function mouseOver(d, data, id, type, variable, category) {
   row.style('background-color', '#fdae61');
   // row.scrollIntoView(true);
 
-  // show tooltip if not table
-  if (type != 'table') {
+  // // show tooltip if not table
+  // if (type != 'table') {
 
-    // display tooltip when mouseover
-    var mouse = [d3.event.pageX, d3.event.pageY];
-    tooltip.classed('hidden', false)
-        .style('left', (mouse[0] - 800) + 'px')
-        .style('top', (mouse[1] - 650) + 'px')
-        .html(function() {
-          // tooltip for worldmap
-          if (type == 'map') {
-            if (data[d[id]]) {
-              return '<strong>Country:</strong> <span>' + d.properties.name + '</span> <br/> <strong>' 
-                + category + ':</strong> <span>' + data[d[id]].number + '</span>';
-            }
-            return '<strong>Country:</strong> <span>' + d.properties.name + '</span> <br/> <strong>' 
-              + category + ':</strong> <span> <i>No Data</i> </span>';
-          }
+  //   // display tooltip when mouseover
+  //   var mouse = [d3.event.pageX, d3.event.pageY];
+  //   tooltip = d3.select('#tooltip' + type);
 
-          // tooltip for barchart
-          else if (type == 'bar') {
-            // tooltip for GDP
-            if (variable == 'GDP') {
-              return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
-                + variable + ':</strong> <span> \u0024' + d[variable].toFixed(2) + '</span>';
-            }
-            // tooltip for Happiness
-            return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
-                + variable + ':</strong> <span>' + d[variable].toFixed(1) + '</span>'; 
-          }
+  //   tooltip.classed('hidden', false)
+  //       .style('left', (mouse[0] - 250) + 'px')
+  //       .style('top', (mouse[1] - 100) + 'px')
+  //       .html(function() {
+  //         // tooltip for worldmap
+  //         if (type == 'map') {
+  //           if (data[d[id]]) {
+  //             return '<strong>Country:</strong> <span>' + d.properties.name + '</span> <br/> <strong>' 
+  //               + category + ':</strong> <span>' + data[d[id]].number + '</span>';
+  //           }
+  //           return '<strong>Country:</strong> <span>' + d.properties.name + '</span> <br/> <strong>' 
+  //             + category + ':</strong> <span> <i>No Data</i> </span>';
+  //         }
 
-          // tooltip for scatterplot
-          else {
-            // tooltip for GDP
-            if (variable == 'GDP') {
-              return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
-              + variable + ':</strong> <span> \u0024' + d[variable].toFixed(2) + '</span> <br/> <strong>' 
-              + category + ':</strong> <span>' + d.number + '</span>';
-            }
+  //         // tooltip for barchart
+  //         else if (type == 'bar') {
+  //           // tooltip for GDP
+  //           if (variable == 'GDP') {
+  //             return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
+  //               + variable + ':</strong> <span> \u0024' + d[variable].toFixed(2) + '</span>';
+  //           }
+  //           // tooltip for Happiness
+  //           return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
+  //               + variable + ':</strong> <span>' + d[variable].toFixed(1) + '</span>'; 
+  //         }
 
-            // tooltip for Happiness
-            return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
-              + variable + ':</strong> <span>' + d[variable].toFixed(1) + '</span> <br/> <strong>' 
-              + category + ':</strong> <span>' + d.number + '</span>'; 
-          }
-        })
-  }
+  //         // tooltip for scatterplot
+  //         else {
+  //           // tooltip for GDP
+  //           if (variable == 'GDP') {
+  //             return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
+  //             + variable + ':</strong> <span> \u0024' + d[variable].toFixed(2) + '</span> <br/> <strong>' 
+  //             + category + ':</strong> <span>' + d.number + '</span>';
+  //           }
+
+  //           // tooltip for Happiness
+  //           return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
+  //             + variable + ':</strong> <span>' + d[variable].toFixed(1) + '</span> <br/> <strong>' 
+  //             + category + ':</strong> <span>' + d.number + '</span>'; 
+  //         }
+  //       })
+  // }
 }
 
 function mouseOut(d, table) {

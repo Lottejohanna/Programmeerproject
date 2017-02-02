@@ -83,7 +83,7 @@ function drawTable(data, year, category, variable) {
     .html(function(d) {return d.html })
     .attr('class', function(d) {return d.cl})
     .on('mouseover', function(d) {
-      mouseOver(d, data, 'countrycode', 'table', variable, category);
+      mouseOver(d, 'countrycode', 'table');
     })
     .on('mouseout', function(d) {
       mouseOut(d, 'countrycode');

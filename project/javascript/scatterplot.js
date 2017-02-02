@@ -9,7 +9,7 @@ function drawScatterplot (data, year, category, variable) {
 
   prepareData(data, year, category, variable, 'no');
 
-  addTooltip('#container3');
+  addTooltip('#container3', 'scatter');
 
   // ordinal colorscale
   var colors = d3.scale.category10();
@@ -66,7 +66,6 @@ function drawScatterplot (data, year, category, variable) {
   scatter.selectAll('g.y.axis').call(yAxis);
   scatter.selectAll('g.x.axis').call(xAxis);
 
-
   // create title
   scatter.append('text')
     .attr('class', 'toptitle rem')
@@ -98,7 +97,25 @@ function drawScatterplot (data, year, category, variable) {
         //     return colors(d.fillKey);
         // })
         .on('mouseover', function(d) {
-          mouseOver(d, data, 'countrycode', 'scatter', variable, category);
+          mouseOver(d, 'countrycode', 'scatter');
+
+          tooltip = d3.select('#tooltip' + 'scatter');
+          // var mouse = d3.mouse(this);
+          var mouse = [d3.event.pageX, d3.event.pageY];
+          tooltip.classed('hidden', false)
+            .attr('style', 'left:' + (mouse[0] - 830) +
+                    'px; top:' + (mouse[1] - 650) + 'px')
+            .html(function() {
+                if (variable == 'GDP') {
+                  return "<strong>Country:</strong> <span>" + d.country + " </span> <br/> <strong>" 
+                  + variable + ":</strong> <span> \u0024" + d[variable].toFixed(2) + "</span> <br/> <strong>" 
+                  + category + ":</strong> <span>" + d.number + "</span>";
+                }
+
+              return "<strong>Country:</strong> <span>" + d.country + " </span> <br/> <strong>" 
+                + variable + ":</strong> <span>" + d[variable].toFixed(1) + "</span> <br/> <strong>" 
+                + category + ":</strong> <span>" + d.number + "</span>";            
+            })
         })
         .on('mouseout', function(d) {
           mouseOut(d, 'countrycode');

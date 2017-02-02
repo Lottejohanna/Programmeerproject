@@ -10,7 +10,7 @@ function drawWorldmap(data, year, category, variable) {
 // select proper year and category
   data = data[year][category];
 
-  addTooltip('#container1');
+  addTooltip('#container1', 'map');
 
   map = new Datamap({element: document.getElementById('container1'),
 
@@ -32,7 +32,25 @@ function drawWorldmap(data, year, category, variable) {
     done: function(datamap, geography) {
       datamap.svg.selectAll('.datamaps-subunit')
         .on('mouseover', function(d) {
-            mouseOver(d, data, 'id', 'map', variable, category);
+            // mouseOver(d, data, 'id', 'map', variable, category);
+            mouseOver(d, 'id', 'map');
+
+            // var mouse = [d3.event.pageX, d3.event.pageY];
+            tooltip = d3.select('#tooltip' + 'map');
+
+            var mouse = d3.mouse(this);
+            tooltip.classed('hidden', false)
+                .attr('style', 'left:' + (mouse[0] + 15) +
+                        'px; top:' + (mouse[1] - 35) + 'px')
+                .html(function() {
+                  // tooltip for worldmap
+                    if (data[d.id]) {
+                      return '<strong>Country:</strong> <span>' + d.properties.name + '</span> <br/> <strong>' 
+                        + category + ':</strong> <span>' + data[d.id].number + '</span>';
+                    }
+                    return '<strong>Country:</strong> <span>' + d.properties.name + '</span> <br/> <strong>' 
+                      + category + ':</strong> <span> <i>No Data</i> </span>';
+                })
         })
         .on('mouseout', function(d) {
             // change color when mouseout

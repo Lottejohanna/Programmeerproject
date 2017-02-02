@@ -26,7 +26,7 @@ function drawBarchart(data, year, variable, category){
       .scale(y)
       .orient('left');
 
-  addTooltip('#container2');
+  addTooltip('#container2', 'bar');
   
   // create svg
   var chart = d3.select('#container2').append('svg')
@@ -96,7 +96,36 @@ function drawBarchart(data, year, variable, category){
       .attr('height', function(d) { return height - y(d[variable]); })
       .attr('id', function(d) {  return d.countrycode })
       .on('mouseover', function(d) {
-        mouseOver(d, data, 'countrycode', 'bar', variable, category);
+        mouseOver(d, 'countrycode', 'bar');
+
+        tooltip = d3.select('#tooltip' + 'bar');
+        var mouse = d3.mouse(this);
+        tooltip.classed('hidden', false)
+            .attr('style', 'left:' + (mouse[0] + 15) +
+                    'px; top:' + (mouse[1] - 35) + 'px')
+            .html(function() {
+                  
+              if (variable == 'GDP') {
+                return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
+                + variable + ':</strong> <span> \u0024' + d[variable].toFixed(2) + '</span>';
+              }
+              // tooltip for Happiness
+              return '<strong>Country:</strong> <span>' + d.country + '</span> <br/> <strong>' 
+                + variable + ':</strong> <span>' + d[variable].toFixed(1) + '</span>';
+              
+              // if (d.value != 0) {
+              //   if (variable == 'GDP') {
+              //     return "<strong>Country:</strong> <span>" + d.country + "</span> <br/> <strong>" 
+              //       + variable + ":</strong> <span> \u0024" + d.value.toFixed(2) + "</span>";
+              //   }
+              //   return "<strong>Country:</strong> <span>" + d.country + "</span> <br/> <strong>" 
+              //       + variable + ":</strong> <span>" + d.value.toFixed(1) + "</span>";
+              // }
+
+              // return "<strong>Country:</strong> <span>" + d.country + " </span> <br/> <strong>" 
+              //   + variable + ":</strong> <span> <i>No Data</i> </span>";
+              
+            })
       })
       .on('mouseout', function(d) {
         mouseOut(d, 'countrycode');
