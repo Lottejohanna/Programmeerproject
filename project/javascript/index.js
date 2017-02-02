@@ -33,7 +33,7 @@ var currVariableBar = 'GDP';
 var currVariableScatter = 'Happiness';
 var currVariable = currVariableBar;
 
-d3.json("data.json", function(error, data) {
+d3.json("project/data.json", function(error, data) {
   if (error) throw error;
 
   // default button color
