@@ -32,6 +32,7 @@ All the countries in the different visualizations are connected by using the sam
 
 The first challenge I encountered was that by using my ideal devised JSON format, I could not give the countries in my worldmap a distinct color according to their fillKey, because the key fillKey was one layer deeper in the JSON file than the colorfunction built in the worldmap from DataMaps was able to work with:
 
+```
 "year": {"countrycode": {"country": .., "weight": [{"category": BMI, "fillKey": A}, 
 													{"category": Overweight, "fillKey": A}, 
 													{"category": Obesity, "fillKey": A}],
@@ -39,9 +40,11 @@ The first challenge I encountered was that by using my ideal devised JSON format
 						"happiness": ..},
 		{"countrycode": ...}},
 "year": ... }}}
+```
 
 Therefore, I changed my JSON format to the less efficient form:
 
+```
 "year": {"BMI": 	{"countrycode": {"country": .., 
 									"fillKey": ..,
 									"GDP": ..,
@@ -61,7 +64,8 @@ Therefore, I changed my JSON format to the less efficient form:
 										"happiness": ..,
 										"countrycode": ..},
 					{"countrycode": ...}}},
-"year": ... }}},
+"year": ... }}}
+```
 
 where the size of my JSON increase by a factor 3. The next challenge was also caused by the form of my JSON file, because, although the form was perfect for my worldmap, it did not work for my barchart, scatterplot and table functions. Then, a girl from my daily standup brought up that I could reformat my JSON file in these functions itself for these visualizations by creating a new dictionary in these functions according to the proper format. No sooner said than done, and in this way it was really easy to remove the 'No Data' points from my dictionary when drawing the barchart and the scatterplot, because these points led to very strange elements in these two graphs, e.g. in the scatterplot these points appeared as dots in the top left corner. 
 
@@ -81,12 +85,12 @@ However, I changed my original plan concerning the two barcharts. The plan for t
 The applications meets all the functional requirements and more. The change from the intended two barcharts to one barchart and one scatterplot was a good decision because it made the application more informative and diversive. For this application I only examined the data for 2 years, i.e. 2010 and 2014, because the first time I checked the site of the World Health Organization this was the only data available. However, a week later they published the data from 1975 up to 2014, which is even more informative than only displaying two years. I started expanding the datasets but discovered after two days of work, that I simply would not have enough time to expand all the data and adjust all the functions for the visualizations to obtain a flawless application before the deadline. So in an ideal world I would expand the dataset and show the data for more than two years on my webpage. Also, with more time I would add some small features as transitions between graphs, fixed headers instead of scrollable ones, learn how to use the update function instead of remove, make the user able to also sort from highest to lowest instead of only from lowest to highest and roll to a specific row of the table once the user clicks on a country, bar or dot in the scatterplot. Nonetheless, even thought a lot could be improved upon this application, I have learned a great deal in the past five months and am satisfied with the final product. 
 
 ### References
-[barchart]: https://bost.ocks.org/mike/bar/
-[scatterplot]: https://jsfiddle.net/eamonnmag/Q567s/
-[ranking in table]: http://stackoverflow.com/questions/27479750/getting-top-10-values-in-a-json-file
-[searching in table]: http://www.w3schools.com/howto/howto_js_filter_table.asp
-[sorting in table]: http://bl.ocks.org/biovisualize/1226718
-[table]: http://bl.ocks.org/gka/17ee676dc59aa752b4e6
-[worldmap]: https://github.com/markmarkoh/datamaps
+[barchart](https://bost.ocks.org/mike/bar/)
+[scatterplot](https://jsfiddle.net/eamonnmag/Q567s/)
+[ranking in table](http://stackoverflow.com/questions/27479750/getting-top-10-values-in-a-json-file)
+[searching in table](http://www.w3schools.com/howto/howto_js_filter_table.asp)
+[sorting in table](http://bl.ocks.org/biovisualize/1226718)
+[table](http://bl.ocks.org/gka/17ee676dc59aa752b4e6)
+[worldmap](https://github.com/markmarkoh/datamaps)
 
 
