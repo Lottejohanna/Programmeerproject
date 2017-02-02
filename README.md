@@ -24,13 +24,13 @@ A table displaying the BMI/overweight/obesity country ranking, the name of the c
 * [Happiness rate](https://en.wikipedia.org/wiki/World_Happiness_Report)
 
 ## Code Sources
-* [barchart](https://bost.ocks.org/mike/bar/)
-* [scatterplot](https://jsfiddle.net/eamonnmag/Q567s/)
-* [ranking in table](http://stackoverflow.com/questions/27479750/getting-top-10-values-in-a-json-file)
-* [searching in table](http://www.w3schools.com/howto/howto_js_filter_table.asp)
-* [sorting in table](http://bl.ocks.org/biovisualize/1226718)
-* [table](http://bl.ocks.org/gka/17ee676dc59aa752b4e6)
-* [worldmap](https://github.com/markmarkoh/datamaps) 
+* [Barchart](https://bost.ocks.org/mike/bar/)
+* [Scatterplot](https://jsfiddle.net/eamonnmag/Q567s/)
+* [Ranking in table](http://stackoverflow.com/questions/27479750/getting-top-10-values-in-a-json-file)
+* [Searching in table](http://www.w3schools.com/howto/howto_js_filter_table.asp)
+* [Sorting in table](http://bl.ocks.org/biovisualize/1226718)
+* [Table](http://bl.ocks.org/gka/17ee676dc59aa752b4e6)
+* [Worldmap](https://github.com/markmarkoh/datamaps) 
 
 ## Libraries
 * Bootstrap.min.js - Copyright 2011-2014 Twitter, Inc.
